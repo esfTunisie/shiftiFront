@@ -85,7 +85,7 @@ class Navbar extends Component {
           <a href="#">Qui Sommes Nous</a>
         </Menu.Item>
         <Menu.Item>
-          <a href="#">Services</a>
+          <Link to="/service">Services</Link>
         </Menu.Item>
         <Menu.Item>
           <a href="#">Offres</a>

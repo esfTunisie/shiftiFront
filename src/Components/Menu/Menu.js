@@ -4,8 +4,15 @@ import { UserOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import logo from '../../assets/img/shifti-logo.png';
 import { Row, Col } from 'antd';
+import {
+    Link
+  } from "react-router-dom";
 
 class MenuNav extends Component {
+
+    goService=()=>{
+        window.location ='/service';
+    }
     render() {
         return (
             <div>
@@ -25,8 +32,8 @@ class MenuNav extends Component {
                             <Menu.Item key="app" >
                                 Qui sommes Nous
                             </Menu.Item>
-                            <Menu.Item>
-                                Services
+                            <Menu.Item onClick={this.goService}>
+                               Services
                             </Menu.Item>
                             <Menu.Item>
                                 Offres

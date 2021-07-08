@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
 import carouselImg1 from '../../assets/img/carousel-img.png';
-import carouselImg2 from '../../assets/img/carousel-img.png';
-import carouselImg3 from '../../assets/img/carousel-img.png';
-import carouselImg4 from '../../assets/img/carousel-img.png';
+import carouselImg2 from '../../assets/img/ahmed.png';
+import carouselImg3 from '../../assets/img/ahmed1.png';
+import carouselImg4 from '../../assets/img/ahmed2.png';
+import carouselImg5 from '../../assets/img/ahmed3.png';
+import carouselImg6 from '../../assets/img/ahmed4.png';
+import carouselImg7 from '../../assets/img/ahmed5.png';
 import carouselLeft from '../../assets/img/carousel-left.png';
 import carouselRight from '../../assets/img/carousel-right.png';
 import { Button } from 'antd';
@@ -17,9 +20,10 @@ import livraison from '../../assets/img/livraison.png';
 import bondeP1 from '../../assets/img/bondeP1.png';
 import { Carousel } from 'antd';
 import { RightOutlined, LeftOutlined } from '@ant-design/icons';
+import { connect } from "react-redux"
 
 
-const images = [carouselImg1, carouselImg2, carouselImg3, carouselImg4];
+const images = [carouselImg1, carouselImg2, carouselImg3, carouselImg4, carouselImg5, carouselImg6, carouselImg7];
 
 class Content extends Component {
 
@@ -31,23 +35,48 @@ class Content extends Component {
       updateCount:0,
     };   
   }
-   
+
+   rednderView =()=>{
+       if(this.props.auth && this.props.auth.token ){
+           window.location ='/user'
+       }
+       else{
+           window.location ='/loginPage'
+       }
+   }
     template = (idx) => {
             switch(idx) {
             case 0:
-                window.location ='/template-one';
+                this.rednderView();
                 break;
             case 1:
-                window.location ='/template-two';
+                this.rednderView();
                 break;
             case 2:
-                window.location ='/template-three';
+                this.rednderView();
                 break;
             case 3:
-                window.location ='/template-four';
+                this.rednderView();
                 break;
+                case 4:
+                    this.rednderView()
+                    break;
+                
+                    case 5:
+                        this.rednderView();
+                        break;
+                    
+                        case 6:
+                             this.rednderView();
+                            break;
+                      
             }
+            
+            
         };
+        redirectTo=()=>{
+            window.location ='loginPage'
+        }
         
     render() {
 
@@ -105,16 +134,16 @@ class Content extends Component {
                     <Row>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12} className="col-service">
 
-                            <h1 className="title-row">Vendez N'importe<br /> Quand , N'importe Où</h1>
-                            <p className="text-row">Shifti vous donne le pouvoir de vendre 
-                                facilement n'importe où, à n'importe qui sur 
-                                Internet et dans le monde entier. Contrôlez 
-                                tout à partir d'une plate-forme unique avec un 
-                                inventaire, une gestion des commandes et une 
-                                tarification centralisée. Ce n'est pas plus 
-                                simple que cela.</p>
+                            <h1 className="title-row">Vivez votre aventure<br />e-commerce en toute tranquillité</h1>
+                            <p className="text-row">Shifti vous donne le pouvoir d'avoir votre propre site de vente en ligne,
+                             avec vos produits et vos services et votre propre identité.
+                            Shifti est une solution de gestion en ligne centralisée
+                            qui facilite la création de sites Web de commerce
+                             électronique personnalisés et automatise les tâches de gestion.
+                            En quelques clics, nous générons votre boutique en ligne,
+                            construire votre plan marketing et gérez vos canaux de médias sociaux.</p>
                             <center>
-                                <Button className="button-service" shape="round"> C'est parti</Button>
+                                <Button onClick={this.redirectTo} className="button-service" shape="round"> C'est parti</Button>
                             </center>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -131,7 +160,7 @@ class Content extends Component {
                                 services mutualisés et à nos outils intégrés qui vous aident à créer, à
                                 mettre en œuvre et à analyser vos campagnes de marketing digital.</p>
                             <center>
-                                <Button className="button-service" shape="round"> C'est parti</Button>
+                                <Button onClick={this.redirectTo} className="button-service" shape="round"> C'est parti</Button>
                             </center>
                         </Col>
 
@@ -144,12 +173,16 @@ class Content extends Component {
                     <Row>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12} className="col-service">
                             <h1 className="title-row-colored">Livrez Là Où Sont<br />Vos Clients</h1>
-                            <p className="text-row-colored">Coordination de la préparation de commande. Livraison :<br />
+                            <p className="text-row-colored">Nous assurons la proximité avec vos clients, <br />
+                                Coordination de la préparation de commande.<br />
                                 coordination les acteurs de la livraisons pour l’acheminement des
-                                produits vers et depuis les villes intérieurs. Retour marchandise : gestion des retours marchandises.
-                                Réclamation client : traitement des réclamation et costumer success.</p>
+                                Coordination les acteurs de la livraisons pour l’acheminement des
+                                produits à leurs acheteurs. 
+                                Retour de commande : gestion des retours marchandises. 
+                                Réclamation client : traitement des réclamation et costumer
+                                success..</p>
                             <center>
-                                <Button className="button-service" shape="round"> C'est parti</Button>
+                                <Button onClick={this.redirectTo} className="button-service" shape="round"> C'est parti</Button>
                             </center>
                         </Col>
                         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
@@ -169,25 +202,36 @@ class Content extends Component {
                             <Row gutter={10}>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="relative">
                                     <hr className="step-divider"/>
-                                    <p className="step-title">Personnalisez votre site</p>
-                                    <p className="step-content">Choisissez un template et personnalisez-le, ou obtenez un site sur-mesure en répondant à quelques questions sur vous et votre activité.</p>
+                                    <p className="step-title">Lancez votre site</p>
+                                    <p className="step-content">Obtenez un site sur-mesure en 72h
+                                        en répondant à quelques questions
+                                        sur votre entreprise et votre activité.</p>
                                 </Col>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="relative">
                                     <hr className="step-divider"/>
                                     <p className="step-title">Ajoutez des fonctionnalités</p>
-                                    <p className="step-content">Ajoutez des fonctionnalités Lancez votre blog, ouvrez une boutique en ligne et acceptez des réservations en ligne. Ajoutez des fonctionnalités à votre guise.</p>
+                                    <p className="step-content">Ajoutez les fonctionnalités et les options 
+                                        qui vous conviennent en toute simplicité
+                                        Lancez votre blog, configurez vous outils 
+                                        de paiement en ligne. Ajoutez
+                                        des fonctionnalités à votre guise.</p>
                                 </Col>
                             </Row>
                             <Row gutter={10}>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="relative">
                                     <hr className="step-divider"/>
-                                    <p className="step-title">Modifiez la version mobile</p>
-                                    <p className="step-content">Optimisez l'affichage de votre site sur tous les écrans et modifiez-le directement depuis l'éditeur mobile.</p>
+                                    <p className="step-title">Mobile First</p>
+                                    <p className="step-content">Vos site responsive adaptés à tout type 
+                                        de support</p>
                                 </Col>
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12} className="relative">
                                     <hr className="step-divider"/>
                                     <p className="step-title">Optimisez votre référencement</p>
-                                    <p className="step-content">Soyez visible sur Google grâce à notre plan SEO personnalisé. Il suffit de répondre à quelques questions au moment de créer votre site web.</p>
+                                    <p className="step-content">Soyez visible sur Google grâce
+                                        à notre plan SEO freindly.
+                                        Il suffit de répondre à quelques
+                                        questions au moment de créer
+                                        votre site web.</p>
                                 </Col>
                             </Row>
                         </div>
@@ -229,10 +273,14 @@ class Content extends Component {
                         <div className="col-content-pack1">
                             <h1 className="pack-title">Starter </h1>
                             <p className="text-pack">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            - Branded e-commerce <br />
+                            - Adapted graphics and content <br />
+                            - Order Management <br />
+
+                                
                             </p>
                             <p className="bas-pack">
-                                300dt<span className="span-pack">/Mois</span>
+                                500dt<span className="span-pack">/Mois</span>
                             </p>
                             </div>
                         </Col>
@@ -240,7 +288,11 @@ class Content extends Component {
                         <div className="col-content-pack2">
                             <h1 className="pack-title">Pioneer </h1>
                             <p className="text-pack">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            - Branded e-commerce <br />
+                            - Adapted graphics and content <br />
+                            - Order Management <br />
+                            - Delivery Management <br />
+                            - Social Media Management <br />
                             </p>
                             <p className="bas-pack">
                                 1500dt<span className="span-pack">/Mois</span>
@@ -252,7 +304,13 @@ class Content extends Component {
                             <img src={bondeP1} className="bondeP1" />
                             <h1 className="pack-title"> Gold</h1>
                             <p className="text-pack">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            - Branded e-commerce <br />
+                            - Adapted graphics and content <br />
+                            - Order Management <br />
+                            - Delivery Management <br />
+                            - Online store updates <br />
+                            - Social Media Management <br />
+                            - SEO / SEA / SMO - Digital campaigns - Promotion <br />
                             </p>
                             <p className="bas-pack">
                                 2000dt<span className="span-pack">/Mois</span>
@@ -268,9 +326,12 @@ class Content extends Component {
                             </Col>
                             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                 <p className="description-text">
-                                    Avec Wix, vous pouvez créer vous-même un site web gratuit et professionnel. Vous pouvez commencer avec un modèle design et le personnaliser, ou obtenir un site créé pour vous sur-mesure. Bénéficiez d'une solution tout-en-un : hébergement web fiable et gratuit, sécurité maximale, référencement puissant et assistance 24h/24.
-                                    <br /><br /><br /> 
-                                    Plus de 160 millions de personnes dans le monde ont déjà choisi Wix pour créer un site web gratuit. Faites comme eux, lancez-vous.
+                                Shifti est le centre Digital de services dédié à la
+                                démocratisation et à l'accélération des projets de
+                                boutiques en ligne. Nous mettons à votre disposition tous les outils et toutes les ressources nécessaires au lancement, à la réussite, et la pérennisation de votre commerce en ligne. 
+                                Avec Shifti, Nos professionnels créerons pour vous votre site e-commerce avec les standards en vigueur en matière  de navigation et de sécurité. Vous pouvez choisir avec un modèle design le personnaliserons pour vous. 
+                                Bénéficiez d'une solution tout-en-un : Branded e-commerce, Marketing digital, communication ciblée, gestions des opérations,
+                                satisfaction client
                                 </p>
                                 <a href="#" className="description-start-link">Commencer <RightOutlined className="description-start-link-icon" /></a>
                             </Col>
@@ -295,5 +356,18 @@ class Content extends Component {
         );
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch: (action) => {
+        dispatch(action);
+        },
+    };
+};
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+        };
+    };
 
-export default Content;
+export default connect(mapStateToProps, mapDispatchToProps) (Content);
+

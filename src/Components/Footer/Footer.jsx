@@ -35,7 +35,7 @@ class Footer extends Component {
                                 <EnvironmentFilled className="icon-footer" /><p className="contact-footer"> Résidence El Badr, Avenue Hédi Nouira, Ariana 2037, Tunisie</p>
                                 </span>
                                 <span className="footer-inline">
-                                <MailFilled className="icon-footer" /><p className="contact-footer">  hello@esftunisie.com</p>
+                                <MailFilled className="icon-footer" /><p className="contact-footer">  hello@shifti.co</p>
                                 </span>
                                 <span className="footer-inline">
                                 <PhoneFilled className="icon-footer" /><p className="contact-footer"> +216 20 28 69 66</p>

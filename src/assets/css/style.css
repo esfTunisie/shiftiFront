@@ -390,7 +390,7 @@
   .text-row {
     font-family: "GilroyMedium";
     color: #181143;
-    line-height: 1;
+    /* line-height: 1; */
     font-size: 17px;
   }
 
@@ -404,7 +404,7 @@
   .text-row-colored {
     font-family: "GilroyMedium";
     color: #EC1577;
-    line-height: 1;
+    /* line-height: 1; */
     font-size: 17px;
   }
 
@@ -664,8 +664,11 @@
     left: 2%;
     right: 2%;
     top: 40%;
-    text-align: center;
+    text-align: left;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .bas-pack {
@@ -1174,7 +1177,7 @@
       left: 10%;
       right: 10%;
       top: 40%;
-      text-align: center;
+      text-align: left;
       position: absolute;
     }
     /* Description */
@@ -1644,6 +1647,39 @@ ul li:hover ul.dropdown{
 }
 ul li ul.dropdown li{
     display: block;
+}
+.title-service{
+  position: relative;
+  color: #111;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-family: 'GilroyBold';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-service{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content-service{
+  font-size: 15px;
+  font-family: 'GilroyBold';
+}
+ol{
+  padding-top: 30px;
+  font-size: medium;
+    font-family: 'GilroyMedium';
+    font-weight: 500;
+}
+.row-service{
+  margin-bottom: 5%;
+}
+.title-service-first{
+  font-size: 30px;
+  font-family: 'GilroyBold';
 }
  
  
