@@ -4,7 +4,9 @@ const initialState = {
     isLogIn:false,
     client:null,
     offreDone:null,
-    steps:3
+    steps:3,
+    password:null,
+    username:null
   };
   
   function AuthReducer(state = initialState, action) {

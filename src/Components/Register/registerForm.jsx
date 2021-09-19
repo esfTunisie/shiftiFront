@@ -6,12 +6,13 @@ import { Select } from 'antd';
 import { Button, notification } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 import { apiURL } from "../../Config/config";
+import isEmail from "validator/lib/isEmail";
 
 
 
 
 const RegisterForm =(props)=>{
-   
+    console.log("props",props);
     const [steps, setSteps] = useState(1)
     const [stepsOne, setStepsOne] = useState(false)
     const [stepsTwo, setStepsTwo] = useState(false)
@@ -49,6 +50,7 @@ const RegisterForm =(props)=>{
     const [passwordLogin, setpasswordLogin] = useState('')
     const [loginError, setloginError] = useState('')
     const [passwordloginError, setpasswordloginError] = useState('')
+    const [valid, setValid] = useState(false)
 
 
 
@@ -127,9 +129,13 @@ const RegisterForm =(props)=>{
         if(nomPrenom == '' || nomPrenom == null){
             setnomPrenomError("*required")
         }
+        if(!isEmail(email)){
+            setEmailError("*verifier que vous avez saisir une adresse email valide")
+        }
         if(email == '' || email == null){
             setEmailError("*required")
         }
+        
         if(phone == '' || phone == null){
             setphoneError("*required")
         }
@@ -143,7 +149,7 @@ const RegisterForm =(props)=>{
             setconfirmPasswordRegisterError("*mismatch data")
         }
         if(nomPrenom || email || phone || passwordRegister !== ''){
-            let formdata = new FormData()
+        let formdata = new FormData()
           formdata.append('first_name', nomPrenom)
           formdata.append('last_name', nomPrenom)
           formdata.append('email', email)
@@ -153,19 +159,54 @@ const RegisterForm =(props)=>{
             // headers: myHeaders,
             body: formdata
           };
-    
           fetch(apiURL + '/register', requestOptions)
             .then(response => {
+               
               if (response.status == 201) {
                 openNotification()
-                setInterval(() => {
-                    window.location='/loginPage'
-                }, 250);
+                getTokenUser().then((e)=>{
+                    if(e !== null){
+                        window.location ='/userVerification'
+                    }
+                })
               }
+              if(response.status == 400){
+                setEmailError("*cette adresse existe déja")
+                setnomPrenomError("")
+                setpasswordRegisterError("")
+                setconfirmPasswordRegisterError("")
+              }
+              
+              
             })
             .catch(error => console.log('error', error));
     
         }
+    }
+    const getTokenUser =async()=>{
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: JSON.stringify({
+            "username": email,
+            "password": passwordRegister
+          }),
+        };
+        const data = await fetch(apiURL+"/api/login_check", requestOptions);
+        if(data.status == 200){
+            const dataToken = await data.json();
+            const str = JSON.stringify(dataToken).substring(10)
+             const newStr = str.substring(0, str.length - 2)
+             const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:email, password:passwordRegister}
+            props.dispatch(action)
+            return newStr
+            
+        }
+       
+        return null;
+        
     }
 
 
@@ -186,6 +227,8 @@ const RegisterForm =(props)=>{
         await fetch(apiURL+"/api/login_check", requestOptions)
           .then(response => {
             if(response.status == 200){
+            const action = {type:"CHANGE_STEPS",steps:1}
+            props.dispatch(action)
               response.text().then(result =>{
                 const str = JSON.stringify(result).substring(14)
                 const newStr = str.substring(0, str.length - 4)
@@ -195,7 +238,7 @@ const RegisterForm =(props)=>{
                    console.log("data",data);
                     const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:emailLogin, client:data}
                     props.dispatch(action)
-                   window.location= '/'
+                   window.location= '/user'
                  
                  })
               })
@@ -237,8 +280,8 @@ const RegisterForm =(props)=>{
                     {nomPrenomError&&<div className="error-user-steps" style={{color:'red'}}>{nomPrenomError}</div>}
                     <Input placeholder='Adresse email' onChange={(e)=>setEmail(e.target.value)} className="register-form-input-style" />
                     {emailError&&<div className="error-user-steps" style={{color:'red'}}>{emailError}</div>}
-                    <Input placeholder='Numéro de téléphone' onChange={(e)=>setphone(e.target.value)} className="register-form-input-style" />
-                    {phoneError&&<div className="error-user-steps" style={{color:'red'}}>{phoneError}</div>}
+                    {/* <Input placeholder='Numéro de téléphone' onChange={(e)=>setphone(e.target.value)} className="register-form-input-style" />
+                    {phoneError&&<div className="error-user-steps" style={{color:'red'}}>{phoneError}</div>} */}
                     <Input.Password  placeholder='Mot de passe' onChange={(e)=>setpasswordRegister(e.target.value)} className="register-form-input-style" />
                     {passwordRegisterError&&<div className="error-user-steps" style={{color:'red'}}>{passwordRegisterError}</div>}
                     <Input.Password  placeholder='Confirmer votre mot de passe' onChange={(e)=>setconfirmPasswordRegister(e.target.value)} className="register-form-input-style" />
@@ -293,14 +336,11 @@ const RegisterForm =(props)=>{
         if( props.auth.steps == 2){
             return(
                 <div className="register-form-content-steps-1">
-               
                 <Input placeholder='password' onChange={(e)=>setPassword(e.target.value)} className="register-form-input-style" />
                 {PasswordError&&<div className="error-user-steps" style={{color:'red'}}>{PasswordError}</div>}
-               
                 <Input placeholder='new password' onChange={(e)=>setNewPassword(e.target.value)} className="register-form-input-style" />
                 <Input placeholder='confirm new password' onChange={(e)=>setNewPasswordConfirmation(e.target.value)} className="register-form-input-style" />
                 {confirmPasswordError&&<div className="error-user-steps" style={{color:'red'}}>{confirmPasswordError}</div>}
-                
                 <Row className='login-form-button-steps-1'><Button onClick={stepsParameterInformation} className='login-form-button-style-steps-1'>Sauvgarder</Button></Row>
             </div>
             )
@@ -308,13 +348,10 @@ const RegisterForm =(props)=>{
         if( props.auth.steps == 1){
             return(
                 <div className="register-form-content-steps-1">
-               
                 <Input placeholder='Nom' onChange={(e)=>setNom(e.target.value)} className="register-form-input-style" />
                 {NomError&&<div className="error-user-steps" style={{color:'red'}}>{NomError}</div>}
-               
                 <Input placeholder='Prenom' onChange={(e)=>setPrenom(e.target.value)} className="register-form-input-style" />
                 {PrenomError&&<div className="error-user-steps" style={{color:'red'}}>{PrenomError}</div>}
-                
                 <Row className='login-form-button-steps-1'><Button onClick={stepsUserInformation} className='login-form-button-style-steps-1'>Sauvgarder</Button></Row>
             </div>
             )

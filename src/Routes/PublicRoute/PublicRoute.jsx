@@ -2,22 +2,21 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Navabar from "../../Components/Navbar/Navabar";
 
 
-const PrivateRoute = ({ component: Component, auth, ...rest }) => (
-    
+const PublicRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
-    render={(props) =>(
-        console.log("props",rest.isAuthenticated),
-        rest.isAuthenticated === true ?
-        <Component {...props}  />
-        : <Redirect to='/loginPage' />
-    )         
+    render={(props) =>
+      <div>
+        <Navabar />
+        <Component {...props} />
+        
+      </div>
     }
-  /> 
-)
-
+  />
+);
 
 PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -36,4 +35,4 @@ const mapDispatchToProps = (dispatch) => {
     };
   };
 
-export default connect(mapStateToProps, mapDispatchToProps) (PrivateRoute);
+export default connect(mapStateToProps, mapDispatchToProps) (PublicRoute);

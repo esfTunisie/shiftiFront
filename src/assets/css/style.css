@@ -1,7 +1,7 @@
   .blue-page-shifty {
     background-color: #181144;
     width: 50%;
-    height: 100vh;
+    /* height: 100%; */
   }
 
   .blue-page-image {
@@ -30,7 +30,10 @@
 
   .register-form-content {
     width: 50%;
-    height: 100vh;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .register-form-title {
@@ -71,7 +74,7 @@
     width: 60%;
     height: 55px;
     border-radius: 55px;
-    margin-bottom: 2%;
+    margin-bottom: 1%;  
   }
 
   /* .ant-input:placeholder-shown{
@@ -187,6 +190,12 @@
     font-family: "GilroyRegular";
     src: url("../fonts/gilroy-regular-webfont.woff");
     src: url("../fonts/gilroy-regular-webfont.woff2");
+  }
+
+  @font-face {
+    font-family: "Poppins-Thin";
+    src: url("../fonts/Poppins-Thin.woff");
+    src: url("../fonts/Poppins-Thin.woff2");
   }
 
   /* poppins-regular - latin */
@@ -546,6 +555,7 @@
   .activeSlide {
     transform: scale(1);
     opacity: 1;
+    box-shadow: 10px 5px 5px rgb(58, 57, 57);
   }
 
   .btn-slider {
@@ -1556,7 +1566,7 @@
   }
   .register-form-content-steps-1{
     width: 50%;
-    height: 100vh;
+    height: 100%;
     text-align: center;
     padding-top: 5%;
   }
@@ -1590,14 +1600,14 @@
   .user-rubrique{
     cursor: pointer;
     font-size: 32px;
-    color: #FB9D19;
+    color: #FFFFFF;
     font-family: 'GilroyBold';
     margin-top: 5%;
   }
   .user-rubrique-selected{
     cursor: pointer;
     font-size: 32px;
-    color: #EC1577;
+    color: #FB9D19;
     font-family: 'GilroyBold';
     margin-top: 5%;
   }
@@ -1650,7 +1660,7 @@ ul li ul.dropdown li{
 }
 .title-service{
   position: relative;
-  color: #111;
+  color: #181143;
   padding-bottom: 20px;
   margin-bottom: 25px;
   font-size: 20px;
@@ -1667,12 +1677,14 @@ ul li ul.dropdown li{
 .content-service{
   font-size: 15px;
   font-family: 'GilroyBold';
+  color: #181143;
 }
 ol{
   padding-top: 30px;
   font-size: medium;
-    font-family: 'GilroyMedium';
+  font-family: 'GilroyMedium';
     font-weight: 500;
+    list-style: none;
 }
 .row-service{
   margin-bottom: 5%;
@@ -1680,6 +1692,391 @@ ol{
 .title-service-first{
   font-size: 30px;
   font-family: 'GilroyBold';
+  margin-bottom: 5%;
+  display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.style-page-service{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+.list-detail-service{
+  display: flex;
+  align-items: center;
+}
+.anticon-check-circle{
+  padding-right: 5px;
+}
+.user-confirmation-code-title{
+  font-size: 40px;
+  font-family: "PoppinsBold";
+  color: #251E4E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+.user-confirmation-code-sous-title{
+  font-size: 16px;
+  font-family: "Poppins-light";
+  color: #251E4E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-confirmation-code-title-indication{
+font-family: 'Poppins-Thin';
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 15%;
+font-size: 25px;
+}
+.inputnumber-code{
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  outline: none;
+  text-align: center;
+}
+.block-input{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4%;
+  text-align: center  ;
+}
+.user-confirmation-button-confirmer{
+  width: 60%;
+  height: 40px;
+  background-color: #181143;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: "PoppinsBold";
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+
+}
+.user-confirmation-button-confimer-block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+.user-confirmation-regener-code{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins-light';
+  padding-top: 3%;
+}
+.user-confirmation-regener-code-message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins-Thin";
+  color: #11035c;
+}
+.user-confirmation-code-disabled{
+  cursor: not-allowed;
+}
+.user-confirmation-code-allowed{
+  cursor: pointer;
+}
+.error-email-exist{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.registration-error-message{
+  display: flex;
+  align-items: center;
+  margin-left: 20%;
+  font-size: 12px;
+}
+.ant-alert-error{
+  background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    width: 60%;
+    height: 50px;
+    border-radius: 17px;
+    margin-bottom: 20px;
+}
+.confirmation-error-message{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 85%; */
+    font-size: 20px;
+    margin-top: 20px;
+}
+.react-tel-input input[type="tel"] {
+  height: 3.5rem;
+  width: 100%;
+  border-radius: 55px;
+  border: 1px solid rgb(182, 181, 181);
+}
+.react-tel-input {
+  margin-bottom: 1rem;
+}
+.react-tel-input .country-list{
+  width: 300px !important;
+  display: grid;
+}
+.react-tel-input .flag-dropdown{
+  border-bottom-left-radius: 55px;
+  border-top-left-radius: 55px;
+}
+.row-user-information{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user-information-input-adresse{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+}
+.form-user-information{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.row-user-information-adresse{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+}
+.button-sauvgarder-user-information{
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.button-sauvgarder-user-information-style{
+  width: 60%;
+  border-radius: 55px;
+  background-color: #181143;
+  color: white;
+  height: 55px;
+  font-family:"PoppinsBold" ;
+}
+.user-information-title{
+  color: #181143;
+  font-family:"PoppinsBold" ;
+  font-size: 40px;
+  margin-bottom: 5%;
+}
+.ant-btn > .anticon {
+  display: none;
+}
+/* .button-user-information-upload:hover , .button-user-information-upload:focus, .button-user-information-upload:active{
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0px 0px 10px 0px #ffffff;
+  font-family: 'GilroyBold';
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+} */
+.button-user-information-upload{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+}
+/* .ant-btn:hover, .ant-btn:focus, .ant-btn:active {
+  background-color: #ffffff;
+} */
+.user-information-page{
+  width: 50%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.user-rubrique:active , .user-rubrique:focus, .user-rubrique:hover {
+  cursor: pointer;
+  font-size: 32px;
+  color: #FB9D19;
+  font-family: 'GilroyBold';
+  margin-top: 5%;
+}
+.row-user-information-info-generale-input{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+  width: 100%;
+}
+.row-user-information-info-generale-input-text-area{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+  width: 100%;
+  text-align: center;
+}
+.blue-page-user-inforamtion {
+  background-color: #181144;
+  width: 30%;
+ min-height: 100vh;
+}
+.user-information-pages{
+  width: 70%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-left: 5%;
+  margin-top: 5%; 
+  min-height: 100vh;
+}
+.row-user-inforamtion-style{
+  margin-right: 5%;
+}
+.row-user-information-domaine{
+ width: 60%;
+}
+.row-user-information-paiement{
+width: 100%;
+margin-left: 5%;
+margin-right: 5%;
+}
+.form-user-domaine{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20%;
+}
+.user-information-title-product{
+  color: #181143;
+  font-family:"PoppinsBold" ;
+  font-size: 30px;
+  margin-bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.row-user-inforamtion-style-product{
+  margin-right: 4%;
+    width: 49%;
+}
+.row-user-information-struct-product{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+.row-user-information-struct-product-photo{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 70px;
+}
+.upload-photo-product{
+  position: relative;
+    bottom: 10px;
+    margin-left: 10px;
+}
+.user-information-categorie-btn-plus{
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #FB9D19;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+.user-information-categorie-btn-plus:hover{
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #181144;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+.user-information-categorie-btn-plus-none{
+  width: 50px;
+  height: 50px;
+}
+.row-user-infomation-paiement-style{
+  padding-bottom: 40px;
+}
+.temp-shop-section-template {
+  width: 70%;
+  background-color: white;
+  padding: 0 40px;
+}
+.template-section-title{
+  color: #181143;
+  font-family: "PoppinsBold";
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom:10%;
+  padding-top: 5%;
+}
+
+/***************devenir partenaire ***************/
+
+.devenir-partenaire{
+  width: 20%;
+  background-color:#181143;
+}
+.devenir-partenaire-img{
+  position: relative;
+    /* left: 0; */
+  right: 230%;
+}
+.devenir-partenaire-right-content{
+  width: 80%;
+  
+}
+.title-devenir-partenaire{
+  color: #181143;
+  font-family: "PoppinsBold";
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.form-devenir-partenaire{
+  width: 100%;
+  padding-right: 20%;
+  padding-left: 20%;
+  margin-top: 5%;
+}
+.row-devenir-partenaire{
+  width: 100%;
+}
+.member-space-update-text{
+  color: #036CAC;
+  font-family: poppins;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
  
  

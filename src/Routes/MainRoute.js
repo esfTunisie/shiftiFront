@@ -11,6 +11,11 @@ import Registration from "../Components/Register/Registration"
 import LoginPage from "../Components/Register/Login/LoginForm"
 import UserInforamtion from "../Components/Register/User/UserInforamtion";
 import service from "../Components/Service/service";
+import { connect } from "react-redux";
+import UserConfiramtionCode from "../Components/Register/User/UserConfiramtionCode";
+import UserEntreprise from "../Components/Register/User/UserEntreprise";
+import BluePage from "../Components/Register/BluePage";
+import DevenirPartenaire from "../Components/devenir partenaire/DevenirPartenaire";
 
 
 const MainRoute = (props) => {
@@ -26,10 +31,28 @@ const MainRoute = (props) => {
         <Route exact path="/espace-client" component={EspaceClient} />
         <Route exact path="/template" component={Template} />
         <Route exact path="/offre" component={Offre} />
-        {props.auth && props.auth.token?<PrivateRoute exact path="/user" component={UserInforamtion} />: <Redirect to="/loginPage"></Redirect>}
+        <Route exact path="/devenir-partenaire" component={DevenirPartenaire} />
+        <PrivateRoute exact path="/user" isAuthenticated={props.auth.isLogIn} component={UserInforamtion} />
+        <PrivateRoute exact path="/user-shop" isAuthenticated={props.auth.isLogIn} component={UserEntreprise} />
+        <PrivateRoute exact path="/userVerification" isAuthenticated={props.auth.isLogIn} component={UserConfiramtionCode} />
+        <PrivateRoute exact path="/user-profile" isAuthenticated={props.auth.isLogIn} component={BluePage} />
       </Switch>
     </Router>
   );
 };
 
-export default MainRoute;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: (action) => {
+      dispatch(action);
+    },
+  };
+};
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (MainRoute);

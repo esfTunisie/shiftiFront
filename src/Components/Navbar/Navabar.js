@@ -26,7 +26,10 @@ class Navbar extends Component {
   logout=()=>{
     const action = {type:"LOGOUT",token:null, client:null, user:null,isLogIn:null, username:null}
     this.props.dispatch(action)
-    window.location='/'
+    setTimeout(() => {
+      window.location='/'
+    }, 1000);
+    
   }
   showMenuConnected =()=>{
     if(this.props.auth && this.props.auth.username){
@@ -126,8 +129,8 @@ class Navbar extends Component {
       <div className="topbar">
             {this.menuMobile()}
             <div className="mobileHidden">
-              <a href="#" className="topbar-menu">Devenir partenaire <span className="mobileVisible"><TeamOutlined /></span></a>
-              <a href="#" className="topbar-menu">Contact <span className="mobileVisible"><TeamOutlined /></span></a>
+              <Link to='/devenir-partenaire' className="topbar-menu">Devenir partenaire <span className="mobileVisible"><TeamOutlined /></span></Link>
+              <Link to='/contact' className="topbar-menu">Contact <span className="mobileVisible"><TeamOutlined /></span></Link>
             </div>
               {/* {this.props.auth && this.props.auth.username?<span className="mobileHidden"> <Link to='/user'>{this.props.auth.username}</Link> </span>:<span className="mobileHidden"> Login </span> } */}
               {this.showMenuConnected()}

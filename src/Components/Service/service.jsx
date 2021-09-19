@@ -6,25 +6,32 @@ import image3 from '../../assets/img/Artboard2.png'
 import image4 from '../../assets/img/Artboard3.png'
 import image5 from '../../assets/img/Artboard3copy.png'
 import { Row, Col } from 'antd';
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer';
+// just use (useEffect). every change will be logged with current value
+import React, { useEffect } from "react";
+import {
+    CheckCircleTwoTone
+  } from '@ant-design/icons';
 
 
 
-
-
-
-
-const service = (props) => {
+const Service = (props) => {
+    const myWidth  = window.innerWidth;
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+          const myWidth  = window.innerWidth; 
+       })
+      },[window])
     return(
-        <div style={{marginRight:"5%", marginLeft:"5%"}}>
+        <div className="style-page-service">
             <Row className='title-service-first'>
             Nos services
             </Row>
             <Row className='row-service'>
-                <Col className='image-service' span={12}>
-                <img src={image1} width={'70%'} />
+                <Col className='image-service' span={12} xs={20} sm={12}>
+                <img src={image1} width={'70%'} height={"80%"} />
                 </Col>
-                <Col span={12}>
+                <Col span={12} xs={20} sm={12}>
                 <p className='title-service'>
                 Mise à disposition de boutiques en ligne
                 </p>
@@ -34,12 +41,12 @@ const service = (props) => {
                 <div>
 
                 <ol>
-                <li>Web Design & UX/UI</li>
-                <li>Adaptation régionale multilingue et multidevises</li>
-                <li>Hébergement</li>
-                <li>Maintenance et mises à jour</li>
-                <li>Sécurité des données</li>
-                <li>Payements en ligne</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Web Design & UX/UI</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Adaptation régionale multilingue et multidevises</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Hébergement</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Maintenance et mises à jour</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Sécurité des données</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Payements en ligne</li>
                 </ol>
                     
                 </div>
@@ -47,7 +54,7 @@ const service = (props) => {
             </Row>
             <Row className='row-service'>
                 
-                <Col span={12}>
+                <Col span={12} xs={20} sm={12}>
                 <p className='title-service'>
                 Marketing et communication ciblée
                 </p>
@@ -60,25 +67,25 @@ const service = (props) => {
                 <div>
 
                 <ol>
-                <li>Gestion des réseaux sociaux</li>
-                <li>Montage vidéo et animation 2D</li>
-                <li>Compagnes de promotions</li>
-                <li>SEO</li>
-                <li>Animation blog</li>
-                <li>Automated journey builder</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Gestion des réseaux sociaux</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Montage vidéo et animation 2D</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Compagnes de promotions</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />SEO</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Animation blog</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Automated journey builder</li>
                 </ol>
                     
                 </div>
                 </Col>
-                <Col className='image-service' span={12}>
-                <img src={image2} width={'70%'} />
+                <Col className='image-service' span={12} xs={20} sm={12}>
+                <img src={image2} width={'70%'} height={"80%"} />
                 </Col>
             </Row>
             <Row className='row-service'>
-            <Col className='image-service' span={12}>
-                <img src={image5} width={'70%'} />
+            <Col className='image-service' span={12} xs={20} sm={12}>
+                <img src={image5} width={'70%'} height={"80%"} />
                 </Col>
-                <Col span={12}>
+                <Col span={12} sm={12}>
                 <p className='title-service'>
                 Gestion des opération quotidiennes
                 </p>
@@ -89,12 +96,12 @@ const service = (props) => {
                 <div>
 
                 <ol>
-                <li>Gestion des commandes</li>
-                <li>Gestion des paiements</li>
-                <li>Gestion des livraisons et tracking</li>
-                <li>Maintenance et mises à jour</li>
-                <li>Intégration CRM et solutions d’entreprise</li>
-                <li>Gestion des retours</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Gestion des commandes</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Gestion des paiements</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Gestion des livraisons et tracking</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Maintenance et mises à jour</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Intégration CRM et solutions d’entreprise</li>
+                <li className="list-detail-service"><CheckCircleTwoTone twoToneColor="#52c41a" />Gestion des retours</li>
                 </ol>
                     
                 </div>
@@ -102,7 +109,7 @@ const service = (props) => {
             </Row>
             <Row className='row-service'>
                
-                <Col span={12}>
+                <Col span={12} xs={20} sm={12}>
                 <p className='title-service'>
                 Gestion des livraisons et des paiements
                 </p>
@@ -113,26 +120,23 @@ const service = (props) => {
                 <div>  
                 </div>
                 </Col>
-                <Col className='image-service' span={12}>
-                <img src={image3} width={'70%'} />
+                <Col className='image-service' span={12} xs={20} sm={12}>
+                <img src={image3} width={'70%'} height={"80%"} />
                 </Col>
             </Row>
             <Row className='row-service'>
-            <Col className='image-service' span={12}>
-                <img src={image4} width={'70%'} />
+            <Col className='image-service' span={12} xs={20} sm={12}>
+                <img src={image4} width={'70%'} height={"80%"} />
                 </Col>
-                <Col span={12}>
+                <Col span={12} xs={20} sm={12}>
                 <p className='title-service'>
                 Solutions de service client 
                 </p>
                 <span className='content-service'>
                 Shifti dispose d'une équipe de service client dédiée et expérimentée prête à aider
                  les acheteurs à tout moment. Des solutions d'appel aux chats en direct,
-                 notre équipe vous fournira une assistance dans en Arabe, Français ou en Anglais.                </span>
+                 notre équipe vous fournira une assistance dans en Arabe, Français ou en Anglais.</span>
                 <div>
-
-  
-                    
                 </div>
                 </Col>
             </Row>
@@ -155,4 +159,4 @@ const mapStateToProps = (state) => {
         };
     };
       
-export default connect(mapStateToProps, mapDispatchToProps)(service);
+export default connect(mapStateToProps, mapDispatchToProps)(Service);
