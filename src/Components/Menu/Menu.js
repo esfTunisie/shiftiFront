@@ -13,6 +13,12 @@ class MenuNav extends Component {
     goService=()=>{
         window.location ='/service';
     }
+    goOffre=()=>{
+        window.location ='/offre';
+    }
+    goHome=()=>{
+        window.location ='/';
+    }
     render() {
         return (
             <div>
@@ -26,7 +32,7 @@ class MenuNav extends Component {
 
                         <Menu mode="horizontal">
 
-                            <Menu.Item key="mail">
+                            <Menu.Item key="mail" onClick={this.goHome}>
                                 Home
                             </Menu.Item>
                             <Menu.Item key="app" >
@@ -35,7 +41,7 @@ class MenuNav extends Component {
                             <Menu.Item onClick={this.goService}>
                                Services
                             </Menu.Item>
-                            <Menu.Item>
+                            <Menu.Item onClick={this.goOffre}>
                                 Offres
                             </Menu.Item>
                         </Menu>

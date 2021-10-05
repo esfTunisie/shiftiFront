@@ -114,7 +114,7 @@ const Domaine = (props) => {
                                 <div onClick={()=>selectTemplate(idx)} className={idx === slideIndex ? "slide activeSlide" : "slide"}>
                                     <img src={img} alt={img} />
                                         <Button className="btn-slider" onClick={() =>template(idx)}>
-                                            View
+                                            Voir
                                         </Button>
                                 </div>
                                 ))}

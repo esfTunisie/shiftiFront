@@ -7,6 +7,8 @@ import image4 from '../../assets/img/Artboard3.png'
 import image5 from '../../assets/img/Artboard3copy.png'
 import { Row, Col } from 'antd';
 import Footer from '../Footer/Footer';
+import Navbar from '../Navbar/Navabar';
+import MenuNav from '../Menu/Menu';
 // just use (useEffect). every change will be logged with current value
 import React, { useEffect } from "react";
 import {
@@ -23,7 +25,12 @@ const Service = (props) => {
        })
       },[window])
     return(
+        <div>
+        <Navbar />
+        
+        <MenuNav />
         <div className="style-page-service">
+            
             <Row className='title-service-first'>
             Nos services
             </Row>
@@ -141,6 +148,7 @@ const Service = (props) => {
                 </Col>
             </Row>
             <Footer />
+        </div>
         </div>
     )
 }

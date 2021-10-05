@@ -59,7 +59,13 @@ const UserConfiramtionCode = (props) => {
           const data = await fetch(apiURL+"/verifyCodeUser", requestOptions);
           if(data.status == 200){
             const action = {type:"CHANGE_STEPS",steps:1}
+            const code = props.auth.token
+            const pass = props.auth.password
+            const usern = props.auth.username
+            const isIn = props.auth.isLogIn
+            const action1 = {type:"GET_TOKEN", token:code, isLogIn:isIn,username:usern, password:pass,actif:1}
             props.dispatch(action)
+            props.dispatch(action1)
               window.location='/user'
           }
           if(data.status !== 200){
