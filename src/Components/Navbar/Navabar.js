@@ -6,6 +6,7 @@ import { Menu, Drawer } from 'antd';
 import { UserOutlined, MenuOutlined, TeamOutlined, MailOutlined } from '@ant-design/icons';
 import { connect } from "react-redux"
 import { Button } from 'antd';
+import UserLogo from "../../assets/img/logoUser.png"
 const { SubMenu } = Menu;
 
 class Navbar extends Component {
@@ -21,7 +22,7 @@ class Navbar extends Component {
     window.location='/loginPage'
   }
   goUser=()=>{
-    window.location='/user'
+    window.location='/user-profile'
   }
   logout=()=>{
     const action = {type:"LOGOUT",token:null, client:null, user:null,isLogIn:null, username:null}
@@ -32,12 +33,14 @@ class Navbar extends Component {
     
   }
   showMenuConnected =()=>{
-    if(this.props.auth && this.props.auth.username){
+    if(this.props.auth && this.props.auth.client != null ){
       return(
         <Button shape="round" className="btn-user"  size={this.state.size} >
       <ul className='btn-user'>
       <li>
-            <p>{this.props.auth.username}</p>
+              <img className="image-logo-username" src={UserLogo} />
+              <span className="mobileHidden"> {this.props.auth.client.username}</span>
+            
             <ul class="dropdown">
                 <li onClick={this.goUser}><a href="#">Profile</a></li>
                 <li onClick={this.logout}><a href="#">Déconnection</a></li>
@@ -51,7 +54,8 @@ class Navbar extends Component {
     }
     else{
       return(
-        <Button onClick={this.goLogin} shape="round" className="btn-login" icon={<UserOutlined className="login-icon"/>} size={this.state.size} >
+        <Button onClick={this.goLogin} shape="round" className="btn-login"  size={this.state.size} >
+              <img className="image-logo-user" src={UserLogo} />
               <span className="mobileHidden"> Login </span>
         </Button>
         
@@ -82,7 +86,7 @@ class Navbar extends Component {
       >
         <Menu mode="vertical">
         <Menu.Item>
-          <a href="#">Home</a>
+          <a href="/">Home</a>
         </Menu.Item>
         <Menu.Item>
           <a href="#">Qui Sommes Nous</a>
@@ -91,7 +95,7 @@ class Navbar extends Component {
           <Link to="/service">Services</Link>
         </Menu.Item>
         <Menu.Item>
-          <a href="#">Offres</a>
+          <a href="/offre">Offres</a>
         </Menu.Item>
         <Menu.Item>
           <a href="#">Devenir partenaire</a>
@@ -130,7 +134,7 @@ class Navbar extends Component {
             {this.menuMobile()}
             <div className="mobileHidden">
               <Link to='/devenir-partenaire' className="topbar-menu">Devenir partenaire <span className="mobileVisible"><TeamOutlined /></span></Link>
-              <Link to='/contact' className="topbar-menu">Contact <span className="mobileVisible"><TeamOutlined /></span></Link>
+              <Link to='/Contact' className="topbar-menu">Contact <span className="mobileVisible"><TeamOutlined /></span></Link>
             </div>
               {/* {this.props.auth && this.props.auth.username?<span className="mobileHidden"> <Link to='/user'>{this.props.auth.username}</Link> </span>:<span className="mobileHidden"> Login </span> } */}
               {this.showMenuConnected()}

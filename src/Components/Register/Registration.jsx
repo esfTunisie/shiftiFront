@@ -43,7 +43,7 @@ const Registration =(props)=>{
         const dataToken = await data.json();
         const str = JSON.stringify(dataToken).substring(10)
          const newStr = str.substring(0, str.length - 2)
-         const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:step.email, password:step.password}
+         const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:step.email, password:step.password, actif:0}
         props.dispatch(action)
         return newStr
         

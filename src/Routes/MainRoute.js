@@ -16,6 +16,7 @@ import UserConfiramtionCode from "../Components/Register/User/UserConfiramtionCo
 import UserEntreprise from "../Components/Register/User/UserEntreprise";
 import BluePage from "../Components/Register/BluePage";
 import DevenirPartenaire from "../Components/devenir partenaire/DevenirPartenaire";
+import Contact from "../Pages/Contact";
 
 
 const MainRoute = (props) => {
@@ -26,8 +27,9 @@ const MainRoute = (props) => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/registration" component={Registration} />
         <Route exact path="/loginPage" component={LoginPage} />
-        <PrivateRoute exact path="/service" component={service} />
+        <Route exact path="/service" component={service} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/Contact" component={Contact} />
         <Route exact path="/espace-client" component={EspaceClient} />
         <Route exact path="/template" component={Template} />
         <Route exact path="/offre" component={Offre} />

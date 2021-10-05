@@ -45,6 +45,7 @@ const BluePage = (props) => {
     const [infoGenError, setinfoGenError] = useState([true,true,true, true,true,true,true, true,true,true,true, true,true,true]);
     const [infoGenErrorMsg, setinfoGenErrorMsg] = useState(['','','', '','','','', '','','','', '','','']);
     const [userPaiement, setuserPaiement] = useState("")
+    const [fileRne, setFileRne] =useState()
 
 
     useEffect(() => {
@@ -188,10 +189,7 @@ const BluePage = (props) => {
         if(dataCategorie.status == 201){ 
             console.log("sucesss");
             setCategorie()
-            setSteps(5)
-
-            
-           
+            setSteps(5)  
         }
     }
     console.log("photo", photo);
@@ -304,7 +302,7 @@ const BluePage = (props) => {
             
             const dataJson = await data.json();
             console.log("dataaaa",dataJson);
-
+           
             if(data.status == 200){ 
                 setInfoGen({email:dataJson.email,username:dataJson.firstName,nomEntreprise:dataJson.userInformation.nomEntreprise,
                 secteurActivite:dataJson.userInformation.secteurActivite,phone:dataJson.userInformation.phone,
@@ -385,6 +383,7 @@ const BluePage = (props) => {
                 auxValidation.error[index]=true
                 auxValidation.errorMsg[index]='required'
             }else{
+                setFileRne(value)
                 auxValidation.error[index]=false
                 auxValidation.errorMsg[index]=''
             }
@@ -457,14 +456,18 @@ const BluePage = (props) => {
           console.log(aux);
           console.log(auxValidation);
     }
-    const defaultFile=
-     [
+  
+    const defaultFile = [
         {
           uid: '0',
-          name:infoGen && infoGen.rne ,
+          name: infoGen && infoGen.rne.length>0?infoGen.rne.split('/').pop(): '',
           status: 'done',
+          url: infoGen && infoGen.rne.length>0? apiURL+infoGen.rne.replace('/public/', ''): '',
+          thumbUrl: infoGen && infoGen.rne.length>0? apiURL+infoGen.rne.replace('/public/', ''): '',
         },
-    ]
+      ]; 
+
+
     const saveModificationInfoGen =async()=>{
         const ERROR = [...validation.error]
         const ERROR_MSG=[...validation.errorMsg]
@@ -490,7 +493,7 @@ const BluePage = (props) => {
                 method: 'POST',
                 body: formdata
               };
-              
+              console.log("rnee",formdata)
               const data =  await fetch(apiURL+'/updateUserInformation/'+props.auth.username,requestOptions);
               const dataJson = await data.json();
               if(data.status == 200){ 
@@ -538,8 +541,9 @@ const BluePage = (props) => {
             </div>
             {steps && steps == 1 ? <InfoGeneral getAllUserInformation={getAllUserInformation} userInformation={infoGen}
             onChangeInfoGeneralUser={onChangeInfoGeneralUser} 
-            infoGenError={infoGenError} infoGenErrorMsg={infoGenErrorMsg}
+            infoGenError={infoGenError} infoGenErrorMsg={infoGenErrorMsg} 
             defaultFile={defaultFile}
+            fileRne={fileRne}
             propsRne={propsRne}
             saveModificationInfoGen={saveModificationInfoGen}
             />: null}

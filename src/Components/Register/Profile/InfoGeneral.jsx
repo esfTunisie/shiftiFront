@@ -32,19 +32,21 @@ const InfoGeneral = (props) => {
         
       };
       
-    // const defaultFile= [
-    //     {
-    //       uid: '0',
-    //       name: props.userInformation &&props.userInformation.userInformation.rne,
-    //       status: 'done',
-    //     },
-    // ]   
+      const defaultFile = [
+        {
+          uid: '0',
+          name: props.fileRne && props.fileRne ? props.fileRne.name : props.userInformation && props.userInformation.rne.length>0?props.userInformation.rne.split('/').pop(): '',
+          status: 'done',
+          url: props.userInformation && props.userInformation.rne.length>0? apiURL+props.userInformation.rne.replace('/public/', ''): '',
+          thumbUrl: props.userInformation && props.userInformation.rne.length>0? apiURL+props.userInformation.rne.replace('/public/', ''): '',
+        },
+      ];  
     const  modificate = () => {
         setmodification(!modification)
        
   }; 
   
-      console.log('userInformation',fileList);
+      console.log('userInformation',props.fileRne);
     return(
             <div className="user-information-pages">
            <Form
@@ -116,7 +118,7 @@ const InfoGeneral = (props) => {
             </Col>
             <Col span={10}>
             <Form.Item>
-                <Upload  placeholder={'RNE'} maxCount={1} accept=".doc,.docx,application/msword"  onChange={(info)=>props.onChangeInfoGeneralUser(info.fileList[0].originFileObj,'rne',7)} >
+                <Upload  placeholder={'RNE'} maxCount={1} accept=".doc,.docx,application/msword"  onChange={(info)=>props.onChangeInfoGeneralUser(info.fileList[0].originFileObj,'rne',7)} fileList={[...defaultFile]} >
                     <Button disabled={modification} className='row-user-information-adresse' icon={<UploadOutlined />}><img width={'5%'} style={{float:"right"}} src={piceJoint} /></Button>
                 </Upload>
                 {props.infoGenError[7]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[7]}</div>}
