@@ -53,17 +53,19 @@ const Registration =(props)=>{
     
 }
 
-  const verifEmail =async(value)=>{
-    const requestOptions = {
-      method: 'POST',
-    };
-    const data = await fetch(apiURL+'/verifUserEmail/'+value,requestOptions);
-     const dataStatus = await data.status;
-    console.log("here2",dataStatus);
-    if(dataStatus == 400){
-      setExistEmail(true)  
-    }
+const verifEmail =async(value)=>{
+  const requestOptions = {
+    method: 'POST',
+  };
+  const data = await fetch(apiURL+'/verifUserEmail/'+value,requestOptions);
+   const dataStatus = await data.status;
+  console.log("here2",dataStatus);
+  if(dataStatus == 400){
+    setExistEmail(true)  
   }
+}
+
+
 
   const onChangeStepOneData=(value,key,index)=>{
     let aux ={...step}

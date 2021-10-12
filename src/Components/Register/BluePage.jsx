@@ -11,12 +11,13 @@ import Product from "./Profile/Product";
 import Paiement from "./Profile/Paiement";
 import Template from "./Profile/Template";
 import { apiURL } from "../../Config/config";
+import Livraison from "./Profile/Livraison";
 
 
 
 const { TextArea } = Input;
 const BluePage = (props) => {
-    const [steps, setSteps] = useState(1)
+    const [steps, setSteps] = useState(4)
     const [fileList, setFileList] = useState()
     const [formValues, setFormValues] = useState([{ categorie: "",}])
     const [produit, setProduit] = useState([{ produit: "",}])
@@ -24,11 +25,15 @@ const BluePage = (props) => {
     const [categorie, setCategorie] = useState("")
     const [produits, setProduits] = useState("")
     const [type, setType] = useState("")
+    const [indextemplate, setIndextemplate] = useState("")
+    const [typelivraison, setTypelivraison] = useState("")
     const [description, setDescription] = useState("")
     const [prix, setPrix] = useState("")
     const [quantite,setQuantite] = useState("")
     const [photo,setPhoto] = useState("")
     const [ValuePaiement,setValuePaiement] = useState("")
+    const [ValueLivraison,setValueLivraison] = useState("")
+    const [ValueTemplate,setValueTemplate] = useState("")
     const [ValueDomaine,setValueDomaine] = useState("")
     const [userInformation,setuserInformation] = useState("")
     const [userDomaine,setuserDomaine] = useState()
@@ -45,6 +50,8 @@ const BluePage = (props) => {
     const [infoGenError, setinfoGenError] = useState([true,true,true, true,true,true,true, true,true,true,true, true,true,true]);
     const [infoGenErrorMsg, setinfoGenErrorMsg] = useState(['','','', '','','','', '','','','', '','','']);
     const [userPaiement, setuserPaiement] = useState("")
+    const [userLivraison, setuserLivraison] = useState("")
+    const [userTemplate, setuserTemplate] = useState("")
     const [fileRne, setFileRne] =useState()
 
 
@@ -52,7 +59,8 @@ const BluePage = (props) => {
         console.log("hereeee");
         getAllUserInformation()
         getPaimentUser()
-       
+        getLivraisonUser()
+        getTemplateUser()
     }, []);
 
     const stepsProps = props.auth.steps
@@ -91,6 +99,7 @@ const BluePage = (props) => {
       const onUploadPhoto =( info, index)=>{
         const updatedArray = [...photo];
         updatedArray[index] = info;
+        console.log("hereeee",updatedArray);
         setPhoto(updatedArray)
       }
 
@@ -155,7 +164,12 @@ const BluePage = (props) => {
             formdata.append('description[]', des)
         });
         photo.forEach(ph => {
-            formdata.append('photo[]', ph)
+            console.log("phhhh",ph);
+            ph.forEach(p =>{
+                console.log("pppp",p);
+                formdata.append('photo[]', p.originFileObj)
+            })
+            // formdata.append('photo[]', ph)
         });
           const requestOptions = {
             method: 'POST',
@@ -167,11 +181,11 @@ const BluePage = (props) => {
         console.log("dataaaa",dataJson);
         if(data.status == 201){ 
             console.log("sucesss");
-            setQuantite()
-            setPrix()
-            setProduits()
-            setDescription()
-            setType()
+            setQuantite("")
+            setPrix("")
+            setProduit([{ produit: "",}])
+            setDescription("")
+            setType("")
             
            
         }
@@ -188,8 +202,14 @@ const BluePage = (props) => {
         
         if(dataCategorie.status == 201){ 
             console.log("sucesss");
-            setCategorie()
-            setSteps(5)  
+            setCategorie([{ categorie: "",}])
+            setQuantite("")
+            setPrix("")
+            setProduit([{ produit: "",}])
+            setDescription()
+            setType("")
+             setSteps(4)
+             window.location.reload()  
         }
     }
     console.log("photo", photo);
@@ -201,7 +221,13 @@ const BluePage = (props) => {
     const onChangePaiement = e => {
         setValuePaiement(e.target.value);
       };
-
+      const onChangeLivraison = e => {
+        setValueLivraison(e.target.value);
+      };
+      const onChangeTemplate = e => {
+          console.log("eeeeeee",e.target.value);
+        setValueTemplate(e.target.value);
+      };
     const getPaimentUser =async()=>{
         const requestOptions = {
             method: 'GET',
@@ -215,6 +241,32 @@ const BluePage = (props) => {
         }
     }  
 
+    const getLivraisonUser =async()=>{
+        const requestOptions = {
+            method: 'GET',
+          };
+        const data = await fetch(apiURL+'/getLivraisonUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+
+        console.log("dataaaa",dataJson);
+        if(data.status == 200){ 
+            setuserLivraison(dataJson)
+        }
+    }
+    const getTemplateUser =async()=>{
+        const requestOptions = {
+            method: 'GET',
+          };
+        const data = await fetch(apiURL+'/getTemplateUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+
+        console.log("datatemp",dataJson);
+        if(data.status == 200){ 
+            setuserTemplate(dataJson)
+            console.log("template",dataJson);
+        }
+    }
+
     const handleSavePaiement =async()=>{
         let formdata = new FormData()
         formdata.append('type', ValuePaiement)
@@ -227,7 +279,42 @@ const BluePage = (props) => {
         const dataJson = await data.json();
         console.log("dataaaa",dataJson);
         if(data.status == 201){ 
+            getPaimentUser()
             setSteps(6)
+        }
+    }
+
+
+    const handleSaveLivraison =async()=>{
+        let formdata = new FormData()
+        formdata.append('typelivraison', ValueLivraison)
+        const requestOptions = {
+            method: 'POST',
+            body: formdata
+          };
+
+        const data = await fetch(apiURL+'/addLivraisonUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+        console.log("datalivraison",dataJson);
+        if(data.status == 201){ 
+            getLivraisonUser()
+            setSteps(1)
+        }
+    }
+    const handleSaveTemplate =async()=>{
+        let formdata = new FormData()
+        formdata.append('indextemplate', ValueTemplate)
+        const requestOptions = {
+            method: 'POST',
+            body: formdata
+          };
+
+        const data = await fetch(apiURL+'/addTemplateUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+        console.log("datatemplate",dataJson);
+        if(data.status == 201){
+            getTemplateUser() 
+            setSteps(4)
         }
     }
     
@@ -550,7 +637,8 @@ const BluePage = (props) => {
             {steps && steps == 2 ? <Domaine handleSaveDomaine={handleSaveDomaine} onChangeDomaine={onChangeDomaine} userDomaine={userDomaine}
             userDomaineError={userDomaineError}
             userDomaineErrorMsg={userDomaineErrorMsg}  /> : null}
-            {steps && steps == 3 ? <Template /> : null}
+            {steps && steps == 3 ? <Template onChangeTemplate={onChangeTemplate} handleSaveTemplate={handleSaveTemplate} userTemplate={userTemplate}
+            getTemplateUser={getTemplateUser}   /> : null}
             {steps && steps == 4 ? <Product 
             handleChangeCategorie={handleChangeCategorie}
             addFormFields={addFormFields}
@@ -565,6 +653,10 @@ const BluePage = (props) => {
             /> : null}
             {steps && steps == 5 ? <Paiement onChangePaiement={onChangePaiement} handleSavePaiement={handleSavePaiement} userPaiement={userPaiement}
             getPaimentUser={getPaimentUser} /> : null}
+
+            {steps && steps == 6 ? <Livraison onChangeLivraison={onChangeLivraison} handleSaveLivraison={handleSaveLivraison} userLivraison={userLivraison}
+            getLivraisonUser={getLivraisonUser} /> : null}
+
             </Row>
         );
        

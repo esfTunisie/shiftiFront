@@ -1948,7 +1948,7 @@ font-size: 25px;
 }
 .row-user-information-paiement{
 width: 100%;
-margin-left: 5%;
+margin-left: 20%;
 margin-right: 5%;
 }
 .form-user-domaine{
@@ -2132,8 +2132,57 @@ margin-right: 5%;
   height: 55px;
   font-family:"PoppinsBold" ;
 }
+.scroll-contact-style{
+  overflow-x: hidden;
+}
+.ant-upload-list-item-error, .ant-upload-list-item-error .ant-upload-text-icon > .anticon, .ant-upload-list-item-error .ant-upload-list-item-name{
+  color: #28a745 !important;
+}
+.ant-upload-list-item-error .ant-upload-list-item-card-actions .anticon{
+  color: #28a745 !important;
+}
+/******************************Responsive user information *********************/
 
-
+@media only screen and (max-width: 525px) {
+  .blue-page-user-inforamtion {
+    display: none;
+  }
+  .ant-btn-round.ant-btn-lg{
+    width: 97%;
+  }
+  .login-form-title {
+    font-size: 20px;
+  }
+  .contact-right-card{
+    width: 80%;
+  }
+  .contact-right-content{
+    width: 80%;
+  }
+  /* .devenir-partenaire{
+    height: 100%;
+  } */
+  .upload-photo-product{
+    width: 80%;
+  }
+  .btn-user{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .image-logo-username{
+    position: absolute;
+    left: -30px;
+    bottom: 0px;
+  }
+  .topbar-menu{
+    padding-right: 20px;
+  }
+ 
+  .row-user-information-struct-product-photo{
+  
+    left: 7px;
+  }
+}
 
 
 
