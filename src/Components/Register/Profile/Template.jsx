@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from "react";
 import { connect } from 'react-redux'
-import { Input, Row, Col, notification, Button, Alert, Form, Select } from 'antd';
+
+import { Input, Row, Col, notification, Button, Alert, Form, Radio  } from 'antd';
 import Slider from "react-slick";
 import carouselImg1 from '../../../assets/img/carousel-img.png';
 import carouselImg2 from '../../../assets/img/ahmed.png';
@@ -14,6 +15,18 @@ import carouselRight from '../../../assets/img/carousel-right.png';
 import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 
 const Domaine = (props) => {
+
+    const [value, setValue] = React.useState(1);
+    const [modification, setmodification] = useState(true)
+
+
+    const  modificate = () => {
+        setmodification(!modification)
+  
+       
+  };
+
+
     const [updateCount, setupdateCount] = useState(0)
     const [slideIndex, setslideIndex] = useState(0)
     const images = [carouselImg1, carouselImg2, carouselImg3, carouselImg4, carouselImg5, carouselImg6, carouselImg7];
@@ -26,7 +39,7 @@ const Domaine = (props) => {
         );
     };
 
-    const PrevArrow = ({ onClick }) => {
+    const PrevArrow = ({ onClick }) => { 
         return (
         <div className="arrow prev" onClick={onClick}>
             <img className="arrow-size" src={carouselLeft} />
@@ -102,8 +115,14 @@ const Domaine = (props) => {
         console.log("test",id);
     }     
 
+
+
+
+
     return(
+       
         <div className="temp-shop-section-template">
+              <Row><span className="member-space-update-text" style={{paddingBottom:"20px"}} onClick={modificate}>{modification ? 'modifier le choix du template' : 'Activer les modifications'} </span></Row>
                         <h2 className="template-section-title">
                             Selectionner une template 
                         </h2>  
@@ -111,18 +130,20 @@ const Domaine = (props) => {
                         <div className="carousel">
                             <Slider ref={slider => (slider = slider)} {...settings}>
                                 {images.map((img, idx) => (
-                                <div onClick={()=>selectTemplate(idx)} className={idx === slideIndex ? "slide activeSlide" : "slide"}>
-                                    <img src={img} alt={img} />
+                                    
+                                <Radio.Group  disabled={modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
+                                  <Radio value={idx}>  <img src={img} alt={img}  /> 
                                         <Button className="btn-slider" onClick={() =>template(idx)}>
-                                            View
+                                            Voir
                                         </Button>
-                                </div>
+                                    </Radio>
+                                </Radio.Group>
                                 ))}
                             </Slider>
                         </div>
                         <a href="#" className="temp-shop-show-all">Voir tout <RightOutlined className="temp-shop-show-all-icon"/> </a>
                         </center>
-                        <Row className='button-sauvgarder-user-information'><Button  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                        <Row className='button-sauvgarder-user-information'><Button disabled={modification} onClick={props.handleSaveTemplate}  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
 
         </div>
     )

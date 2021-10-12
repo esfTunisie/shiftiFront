@@ -267,9 +267,12 @@
     font-family: "GilroyMedium";
     font-weight: 200;
     font-size: 15px;
-    color: #181143;
+    color: #181143 !important;
     padding-right: 70px;
     text-decoration: none;
+  }
+  .topbar-menu >a{
+    color: #181143 !important;
   }
 
   .topbar-menu:hover {
@@ -285,6 +288,7 @@
     border: none!important;
     box-shadow: 0 0!important;
     height: 30px!important;
+    width: 8%;
   }
 
   .login-icon {
@@ -779,6 +783,7 @@
   .footer-inline {
     display: flex;
   }
+
 
   .newsletter {
     position: relative;
@@ -1612,7 +1617,8 @@
     margin-top: 5%;
   }
   .mobileHidden >a{
-    color: whitesmoke !important;
+    color: whitesmoke ;
+
   }
   .btn-user{
     padding: 0px 30px 0px 40px!important;
@@ -1690,7 +1696,7 @@ ol{
   margin-bottom: 5%;
 }
 .title-service-first{
-  font-size: 30px;
+  font-size: 50px;
   font-family: 'GilroyBold';
   margin-bottom: 5%;
   display: flex;
@@ -1871,9 +1877,9 @@ font-size: 25px;
   font-size: 40px;
   margin-bottom: 5%;
 }
-.ant-btn > .anticon {
+/* .ant-btn > .anticon {
   display: none;
-}
+} */
 /* .button-user-information-upload:hover , .button-user-information-upload:focus, .button-user-information-upload:active{
   background-color: #ffffff;
   border-color: #ffffff;
@@ -1942,7 +1948,7 @@ font-size: 25px;
 }
 .row-user-information-paiement{
 width: 100%;
-margin-left: 5%;
+margin-left: 20%;
 margin-right: 5%;
 }
 .form-user-domaine{
@@ -2044,6 +2050,13 @@ margin-right: 5%;
   width: 80%;
   
 }
+.contact-right-content{
+  width: 37%;
+  padding-right: 6%;
+}
+.contact-right-card{
+  width: 40%;
+}
 .title-devenir-partenaire{
   color: #181143;
   font-family: "PoppinsBold";
@@ -2054,6 +2067,17 @@ margin-right: 5%;
   padding-top: 5%;
   padding-bottom: 5%;
 }
+.title-contact{
+  color: #181143;
+  font-family: "PoppinsBold";
+  font-size: 47.12px;
+  display: flex;
+  align-items: center;
+ 
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
 .form-devenir-partenaire{
   width: 100%;
   padding-right: 20%;
@@ -2071,10 +2095,94 @@ margin-right: 5%;
   letter-spacing: 1.2px;
   cursor: pointer;
 }
+.image-logo-user{
+  position: absolute;
+    left: 9px;
+    bottom: 5px;
+}
 
+.image-logo-username{
+  position: absolute;
+  left: -35px;
+  bottom: 2px;
+}
+/********************contact ******************/
 
+.row-contact{
+  width: 100%;
+  padding-bottom: 5%;
+}
+.footer-contact{
+  margin-left: 15%;
+}
+.form-contact{
+  width: 100%;
+  
+  padding-left: 20%;
+  margin-top: 5%;
+}
+.icon-inline {
+  display: flex;
+}
+.button-send-contact-style{
+  width: 100%;
+  border-radius: 55px;
+  background-color: #181143;
+  color: white;
+  height: 55px;
+  font-family:"PoppinsBold" ;
+}
+.scroll-contact-style{
+  overflow-x: hidden;
+}
+.ant-upload-list-item-error, .ant-upload-list-item-error .ant-upload-text-icon > .anticon, .ant-upload-list-item-error .ant-upload-list-item-name{
+  color: #28a745 !important;
+}
+.ant-upload-list-item-error .ant-upload-list-item-card-actions .anticon{
+  color: #28a745 !important;
+}
+/******************************Responsive user information *********************/
 
-
+@media only screen and (max-width: 525px) {
+  .blue-page-user-inforamtion {
+    display: none;
+  }
+  .ant-btn-round.ant-btn-lg{
+    width: 97%;
+  }
+  .login-form-title {
+    font-size: 20px;
+  }
+  .contact-right-card{
+    width: 80%;
+  }
+  .contact-right-content{
+    width: 80%;
+  }
+  /* .devenir-partenaire{
+    height: 100%;
+  } */
+  .upload-photo-product{
+    width: 80%;
+  }
+  .btn-user{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .image-logo-username{
+    position: absolute;
+    left: -30px;
+    bottom: 0px;
+  }
+  .topbar-menu{
+    padding-right: 20px;
+  }
+ 
+  .row-user-information-struct-product-photo{
+  
+    left: 7px;
+  }
+}
 
 
 

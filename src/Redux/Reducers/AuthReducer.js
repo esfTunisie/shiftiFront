@@ -6,7 +6,9 @@ const initialState = {
     offreDone:null,
     steps:3,
     password:null,
-    username:null
+    username:null,
+    actif:null,
+    users:null
   };
   
   function AuthReducer(state = initialState, action) {
@@ -19,8 +21,14 @@ const initialState = {
           username: action.username,
           password: action.password,
           client: action.client,
-          user:action.user
+          user:action.user,
+          actif:action.actif
         };
+        case "SET_USER":
+          return {
+            ...state,
+            users: action.value,
+          };
         case "OFFRE_DONE":
           return {
             ...state,

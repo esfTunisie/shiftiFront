@@ -16,8 +16,10 @@ const LoginPage =(props)=>{
   const [data, setData] = useState({email:'',password:'',validation:{error:[true,true], errorMsg:['required','required']}});
   const [dataError, setDataError] = useState([true,true]);
   const [dataErrorMsg, setDataErrorMsg] = useState(['','']);
-  
+  const [error, setError] = useState(false)
 
+
+  
   const onChangeData=(value,key,index)=>{
     let aux ={...data}
     aux[key]=value
@@ -46,7 +48,7 @@ const LoginPage =(props)=>{
     }
     setData(aux)
   }
-  const handleSubmit=async()=>{
+  const handleSubmit= async()=>{
     const ERROR = [...data.validation.error]
     const ERROR_MSG=[...data.validation.errorMsg]
     setDataError(ERROR)
@@ -62,6 +64,10 @@ const LoginPage =(props)=>{
           "password": data.password
         }),
       };
+      const requestOptions1 = {
+        method: 'GET', 
+      };
+      const data1 = await fetch(apiURL+'/getAllUserInformation/'+data.email,requestOptions1);
       
       await fetch(apiURL+"/api/login_check", requestOptions)
         .then(response => {
@@ -75,10 +81,33 @@ const LoginPage =(props)=>{
                 'Authorization': 'Bearer '+newStr}})
                .then(response => response.json()).then(dataMagsin => {
                  console.log("data",data);
+                 if(dataMagsin.actif == true){
                   const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:data.email, client:dataMagsin, password:data.password}
                   props.dispatch(action)
-                 window.location= '/user-profile'
-               
+                  
+
+                  if(data1.status == 200){ 
+
+                    window.location= '/user-profile'
+
+                  }
+                  if(data1.status !== 200){ 
+
+                    window.location= '/user'
+
+                  }
+                
+                }
+                if(dataMagsin.actif == false){
+                  setError('Compte en attente. Veuillez vérifier votre e-mail !')
+                  const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:data.email, password:data.password}
+                  props.dispatch(action)
+                  window.location ='/userVerification'
+                 
+                }
+
+
+
                })
             })
     
@@ -138,7 +167,11 @@ const LoginPage =(props)=>{
                     <Input.Password  placeholder='Mot de passe' onChange={(e)=>onChangeData(e.target.value,'password',1)} className="register-form-input-style" value={data.password} />
                     {dataError[1]&&<div className='registration-error-message' style={{color:'red'}}>{dataErrorMsg[1]}</div>}
               </Form.Item>
-              </Form>      
+              </Form>  
+              <Row className='confirmation-error-message'>
+                {error&&<div style={{color:'red'}}>{error}</div>}
+
+                </Row>    
                     <Row className='login-form-button'><Button className='login-form-button-style' onClick={handleSubmit}>S'identifier</Button></Row>
                     <span onClick={registration} className='register-form-sign_in'> Sign up</span>
                 </div>

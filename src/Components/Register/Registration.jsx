@@ -43,7 +43,7 @@ const Registration =(props)=>{
         const dataToken = await data.json();
         const str = JSON.stringify(dataToken).substring(10)
          const newStr = str.substring(0, str.length - 2)
-         const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:step.email, password:step.password}
+         const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:step.email, password:step.password, actif:0}
         props.dispatch(action)
         return newStr
         
@@ -53,17 +53,19 @@ const Registration =(props)=>{
     
 }
 
-  const verifEmail =async(value)=>{
-    const requestOptions = {
-      method: 'POST',
-    };
-    const data = await fetch(apiURL+'/verifUserEmail/'+value,requestOptions);
-     const dataStatus = await data.status;
-    console.log("here2",dataStatus);
-    if(dataStatus == 400){
-      setExistEmail(true)  
-    }
+const verifEmail =async(value)=>{
+  const requestOptions = {
+    method: 'POST',
+  };
+  const data = await fetch(apiURL+'/verifUserEmail/'+value,requestOptions);
+   const dataStatus = await data.status;
+  console.log("here2",dataStatus);
+  if(dataStatus == 400){
+    setExistEmail(true)  
   }
+}
+
+
 
   const onChangeStepOneData=(value,key,index)=>{
     let aux ={...step}

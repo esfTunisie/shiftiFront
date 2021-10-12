@@ -198,8 +198,9 @@ const RegisterForm =(props)=>{
         if(data.status == 200){
             const dataToken = await data.json();
             const str = JSON.stringify(dataToken).substring(10)
-             const newStr = str.substring(0, str.length - 2)
-             const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:email, password:passwordRegister}
+           
+            const newStr = str.substring(0, str.length - 2)
+            const action = {type:"GET_TOKEN", token:newStr, isLogIn:true,username:email, password:passwordRegister, actif: 0}
             props.dispatch(action)
             return newStr
             

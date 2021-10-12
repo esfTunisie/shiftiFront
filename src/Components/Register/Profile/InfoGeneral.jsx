@@ -13,11 +13,21 @@ const InfoGeneral = (props) => {
     const [userInformation, setuserInformation] = useState()
     const [loading, setloading] = useState(false)
     const [modification, setmodification] = useState(true)
+    const [dimensions, setDimensions] = React.useState({ 
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
     
     useEffect(() => {
-        console.log("hereeee");
-       
+     const   handleResize =()=> {
+            setDimensions({
+              height: window.innerHeight,
+              width: window.innerWidth
+            })
+      }
+          window.addEventListener('resize', handleResize)
     }, []);
+    console.log("dimenssion0",dimensions);
  
     const cv = {
         name: 'cv',
@@ -32,19 +42,21 @@ const InfoGeneral = (props) => {
         
       };
       
-    // const defaultFile= [
-    //     {
-    //       uid: '0',
-    //       name: props.userInformation &&props.userInformation.userInformation.rne,
-    //       status: 'done',
-    //     },
-    // ]   
+      const defaultFile = [
+        {
+          uid: '0',
+          name: props.fileRne && props.fileRne ? props.fileRne.name : props.userInformation && props.userInformation.rne.length>0?props.userInformation.rne.split('/').pop(): '',
+          status: 'done',
+          url: props.userInformation && props.userInformation.rne.length>0? apiURL+props.userInformation.rne.replace('/public/', ''): '',
+          thumbUrl: props.userInformation && props.userInformation.rne.length>0? apiURL+props.userInformation.rne.replace('/public/', ''): '',
+        },
+      ];  
     const  modificate = () => {
         setmodification(!modification)
        
   }; 
   
-      console.log('userInformation',fileList);
+      console.log('userInformation',props.fileRne);
     return(
             <div className="user-information-pages">
            <Form
@@ -59,13 +71,13 @@ const InfoGeneral = (props) => {
             <span className="member-space-update-text" onClick={modificate}>{modification ? 'modifiez le profile' : 'Activer les modifications'} </span>
 
             <Row>
-            <Col className="row-user-inforamtion-style" span={10}>
+            <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder="username" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'username',0)} value={props.userInformation && props.userInformation.username}  />
                         {props.infoGenError[0]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[0]}</div>}
                 </Form.Item>
             </Col>
-            <Col span={10}>
+            <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder="Nom de l'entreprise" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'nomEntreprise',1)} value={props.userInformation &&props.userInformation.nomEntreprise}  />
                         {props.infoGenError[1]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[1]}</div>}
@@ -73,28 +85,32 @@ const InfoGeneral = (props) => {
             </Col>
             </Row>
             <Row>
-            <Col className="row-user-inforamtion-style" span={10}>
+            <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder="Email"  className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.email} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'email',2)} />
                         {props.infoGenError[2]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[2]}</div>}
                 </Form.Item>
             </Col>
-            <Col span={10}>
+            <Col span={dimensions.width > 525 ? 10: 24}>
                 <Select disabled={modification} defaultValue="Secteur d'activité" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.secteurActivite} onChange={(e)=>props.onChangeInfoGeneralUser(e,'secteurActivite',3)}>
-                        <Option value="secteur 1">{'secteur 1'}</Option>
-                        <Option value="secteur 2">{"secteur 2"}</Option>
+                    <Option value="E-commerce">{'E-commerce'}</Option>
+                    <Option value="Technologie">{"Technologie"}</Option>
+                    <Option value="Industrie">{"Industrie"}</Option>
+                    <Option value="Agriculture">{"Agriculture"}</Option>
+                    <Option value="Communication">{"Communication"}</Option>
+                    <Option value="Service">{"Service"}</Option>
                 </Select>
                 {props.infoGenError[3]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[3]}</div>}
             </Col>
             </Row>
             <Row>
-            <Col className="row-user-inforamtion-style" span={10}>
+            <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder="Phone" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.phone} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'phone',4)} />
                         {props.infoGenError[4]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[4]}</div>}
                 </Form.Item>
             </Col>
-            <Col span={10}>
+            <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder="Produit" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.produit} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'produit',5)} />
                         {props.infoGenError[5]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[5]}</div>}
@@ -107,17 +123,21 @@ const InfoGeneral = (props) => {
                         <Input disabled={modification} placeholder="Mot de passe actuel" className='row-user-information-info-generale-input'  onchange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'password',6)} />
                 </Form.Item>
             </Col> */}
-            <Col span={10} className="row-user-inforamtion-style">
+            <Col span={dimensions.width > 525 ? 10: 24}className="row-user-inforamtion-style">
                 <Select disabled={modification} defaultValue="Chiffre d'affaire annuel" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.chiffreAffaire} onChange={(e)=>props.onChangeInfoGeneralUser(e,'chiffreAffaire',6)}>
-                        <Option value="chiffre affaire 1">{'chiffre affaire 1'}</Option>
-                        <Option value="chiffre affaire 2">{"chiffre affaire 2"}</Option>
+                    <Option value="Moins de 5000 DT">{'Moins de 5000 DT'}</Option>
+                    <Option value="À partir de 5000 DT">{"À partir de 5000 DT"}</Option>
+                   
+                    <Option value="Entre 5000 DT et 10000 DT">{"Entre 5000 DT et 10000 DT"}</Option>
+                    <Option value="Plus de 10000 DT">{"Plus de 10000 DT"}</Option>
+                    <Option value="Plus de 20000 DT">{"Plus de 20000 DT"}</Option>
                 </Select>
                 {props.infoGenError[6]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[6]}</div>}
             </Col>
-            <Col span={10}>
+            <Col span={dimensions.width > 525 ? 10: 24}>
             <Form.Item>
-                <Upload  placeholder={'RNE'} maxCount={1} accept=".doc,.docx,application/msword"  onChange={(info)=>props.onChangeInfoGeneralUser(info.fileList[0].originFileObj,'rne',7)} >
-                    <Button disabled={modification} className='row-user-information-adresse' icon={<UploadOutlined />}><img width={'5%'} style={{float:"right"}} src={piceJoint} /></Button>
+                <Upload  placeholder={'RNE'} maxCount={1} accept=".doc,.docx,application/msword"  onChange={(info)=>props.onChangeInfoGeneralUser(info.fileList[0].originFileObj,'rne',7)} fileList={[...defaultFile]} >
+                    <Button disabled={modification} className='row-user-information-adresse' icon={<UploadOutlined />}><img width={'5%'} style={{float:"right"}} src={piceJoint} /></Button>    
                 </Upload>
                 {props.infoGenError[7]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[7]}</div>}
             </Form.Item>
@@ -132,7 +152,7 @@ const InfoGeneral = (props) => {
             
             </Row>
             <Row>
-                <Col span={10} className="row-user-inforamtion-style">
+                <Col span={dimensions.width > 525 ? 10: 24} className="row-user-inforamtion-style">
                 <div className='row-user-information'>
                         <div>
                         <Form.Item>
@@ -166,7 +186,7 @@ const InfoGeneral = (props) => {
                        </div>
                 </div>                
                 </Col>
-                <Col span={10}>
+                <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
                         <Input disabled={modification} placeholder={'site web'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.webSite} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'webSite',13)} />
                         {props.infoGenError[13]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[13]}</div>}
