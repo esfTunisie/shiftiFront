@@ -183,7 +183,7 @@ const DevenirPartenaire = (props) => {
                             {stepError[5]&&<div style={{color:'red'}}>{stepErrorMsg[5]}</div>}
                         </Row>
                     </div>
-                <Row className='button-sauvgarder-user-information'><Button  className='button-sauvgarder-user-information-style'  onClick={() => submitForm()}>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-partenanire'><Button  className='button-sauvgarder-user-information-style'  onClick={() => submitForm()}>Sauvgarder</Button></Row>
                 <Row className='confirmation-error-message'>
                 {error&&<div style={{color:'red'}}>{error}</div>}
                 {success&&<div style={{color:'success'}}>{success}</div>}

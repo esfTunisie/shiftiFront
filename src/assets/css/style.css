@@ -1,14 +1,18 @@
   .blue-page-shifty {
     background-color: #181144;
-    width: 50%;
-    /* height: 100%; */
+    width: 29%;
+    height: 110vh;
   }
-
+  .blue-page-shifty-code {
+    background-color: #181144;
+    width: 29%;
+    height: 110vh;
+  }
   .blue-page-image {
-    width: 85%;
+    width: 155%;
     margin-right: 50%;
     position: relative;
-    right: 25%;
+    right: 100%;
     padding-top: 3%;
   }
 
@@ -29,12 +33,20 @@
   }
 
   .register-form-content {
-    width: 50%;
+    width: 70%;
     height: 100%;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: hidden;
   }
+  .code-form-content {
+    width: 70%;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
 
   .register-form-title {
     font-family: "PoppinsBold";
@@ -83,7 +95,15 @@
 
   .register-form-button {
     align-items: center;
+ 
     justify-content: center;
+   
+    width: 60%;
+    position: relative;
+    left: 20%;
+
+
+    
   }
 
   .register-form-button-style {
@@ -107,21 +127,26 @@
   }
 
   .login-form-title {
+  
+    margin-top: 5%;
+    margin-bottom: 15%;
+    
     font-family: "PoppinsBold";
     font-size: 50px;
     color: #251E4E;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5%;
-    margin-bottom: 15%;
+   
   }
 
   .login-form-button {
     align-items: center;
     justify-content: center;
-    padding-top: 15%;
-    padding-bottom: 5%;
+  
+    width: 60%;
+    position: relative;
+    left: 20%;
   }
 
   .login-form-button-style {
@@ -296,7 +321,28 @@
     font-size: 15px;
     margin: 0 30px 0 -30px;
   }
+  .member-space-content{
+    position: absolute;
+    right: 0;
+    width: 70%;
+    background-color: white;
+    padding-left: 60px;
+    padding-top: 20px;
+    transition: width 0.8s;
 
+    
+  }
+  
+  .member-space-content-collapsed{
+    position: absolute;
+    right: 0;
+    width: 93.6%;
+    background-color: white;
+    padding-left: 115px;
+    padding-top: 20px;
+    transition: width 0.8s;
+  }
+  
   /* Menu */
 
   .menu-pad-row {
@@ -1602,20 +1648,7 @@
     display: table;
     margin-top: 30%;
   }
-  .user-rubrique{
-    cursor: pointer;
-    font-size: 32px;
-    color: #FFFFFF;
-    font-family: 'GilroyBold';
-    margin-top: 5%;
-  }
-  .user-rubrique-selected{
-    cursor: pointer;
-    font-size: 32px;
-    color: #FB9D19;
-    font-family: 'GilroyBold';
-    margin-top: 5%;
-  }
+ 
   .mobileHidden >a{
     color: whitesmoke ;
 
@@ -1753,6 +1786,7 @@ font-size: 25px;
   justify-content: center;
   margin-top: 4%;
   text-align: center  ;
+  gap: 1px;
 }
 .user-confirmation-button-confirmer{
   width: 60%;
@@ -1859,10 +1893,59 @@ font-size: 25px;
 }
 .button-sauvgarder-user-information{
   align-items: center;
+  width: 76%;
   justify-content: center;
   padding-top: 5%;
   padding-bottom: 5%;
 }
+.button-sauvgarder-user-product{
+  align-items: center;
+  width: 78%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.button-sauvgarder-user-domaine{
+  align-items: center;
+  width: 99%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.button-sauvgarder-user-livraison{
+
+  align-items: center;
+  width: 115%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+} 
+.button-sauvgarder-user-paiement{
+
+  align-items: center;
+  width: 115%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+} 
+.button-sauvgarder-user-partenanire{
+
+  align-items: center;
+  width: 60%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  position: relative;
+  left: 19%;
+}
+.button-sauvgarder-user-template{
+
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+} 
 .button-sauvgarder-user-information-style{
   width: 60%;
   border-radius: 55px;
@@ -1905,13 +1988,7 @@ font-size: 25px;
   overflow-x: hidden;
   overflow-y: hidden;
 }
-.user-rubrique:active , .user-rubrique:focus, .user-rubrique:hover {
-  cursor: pointer;
-  font-size: 32px;
-  color: #FB9D19;
-  font-family: 'GilroyBold';
-  margin-top: 5%;
-}
+
 .row-user-information-info-generale-input{
   height: 55px;
   border-radius: 55px;
@@ -1965,23 +2042,34 @@ margin-right: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 25%;
 }
+.member-space .ant-menu-root.ant-menu-inline{
+  color: white;
+}
+
+.member-space .ant-menu-title-content{
+  color: white;
+  font-family: poppins;
+  font-weight: 700;
+}
+
 .row-user-inforamtion-style-product{
   margin-right: 4%;
     width: 49%;
 }
 .row-user-information-struct-product{
-  width: 100%;
+  width: 85%;
   align-items: center;
   justify-content: center;
 
 }
 .row-user-information-struct-product-photo{
-  width: 100%;
+  width: 102%;
   align-items: center;
   justify-content: center;
   position: relative;
-  left: 70px;
+  left: 15px;
 }
 .upload-photo-product{
   position: relative;
@@ -2020,7 +2108,7 @@ margin-right: 5%;
   padding-bottom: 40px;
 }
 .temp-shop-section-template {
-  width: 70%;
+  width: 60%;
   background-color: white;
   padding: 0 40px;
 }
@@ -2085,9 +2173,26 @@ margin-right: 5%;
   margin-top: 5%;
 }
 .row-devenir-partenaire{
-  width: 100%;
+  width: 60%;
+  margin-bottom: 1em;
+  position: relative;
+  left: 19%;
+}
+.row-login-form{
+  width: 60%;
+
+  position: relative;
+  left: 20%;
 }
 .member-space-update-text{
+  color: #036CAC;
+  font-family: poppins;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+}
+.member-space-update-text-template{
   color: #036CAC;
   font-family: poppins;
   font-weight: 400;
@@ -2144,14 +2249,21 @@ margin-right: 5%;
 /******************************Responsive user information *********************/
 
 @media only screen and (max-width: 525px) {
-  .blue-page-user-inforamtion {
+  
+  /* .blue-page-user-inforamtion {
     display: none;
+  } */
+  .blue-page-shifty-code{
+    display: none;
+  }
+  .ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child){
+    margin-bottom: 30px !important;
   }
   .ant-btn-round.ant-btn-lg{
     width: 97%;
   }
   .login-form-title {
-    font-size: 20px;
+    font-size: 25px;
   }
   .contact-right-card{
     width: 80%;
@@ -2163,7 +2275,9 @@ margin-right: 5%;
     height: 100%;
   } */
   .upload-photo-product{
-    width: 80%;
+    width: 55%;
+    align-items: center;
+    justify-content: center;
   }
   .btn-user{
     padding-left: 10px !important;
@@ -2179,12 +2293,410 @@ margin-right: 5%;
   }
  
   .row-user-information-struct-product-photo{
-  
-    left: 7px;
+    
+    left: -18px;
   }
+  .login-form-title{
+    font-size: 20px;
+  }
+  .register-form-title{
+
+    font-size: 20px;
+  }
+  .register-form-sign_in{
+    font-size: 15px;
+  }
+  .register-form-compte-exist{
+    font-size: 10px;
+  }
+  .register-form-button-style{
+    font-size: 13px;
+  }
+  .register-form-input-style {
+    width: 100%;
+    height: 55px;
+   
+  }
+  .login-form-button-style{
+    font-size: 13px;
+  }
+  .user-information-pages{
+    width: 90%;
+  }
+  .user-information-categorie-btn-plus-none{
+    display: none;
+    width: 0px !important;
+    height: 0px !important;
+  }
+  .row-user-information-struct-product-mobile{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .row-user-inforamtion-style-product{
+    margin-right: 5%;
+      width: 72%;
+  }
+ 
+  .member-space-content{
+    padding-left: 7%;
+    padding-top: 3%;
+    width: 80%;
+  }
+  .member-space-content-collapsed{
+    padding-left: 7%;
+    padding-top: 3%;
+    width: 80%;
+  }
+  .ant-layout-sider {
+    z-index: 1000;
+    min-width: 100%!important;
+    width: 100%!important;
+    flex: 0 0 60%!important;
+    max-width: 100%!important;
+    transition: 0.8s ease;
+    
+  }
+  .ant-layout-sider-collapsed{
+    min-width: 20%!important;
+    width: 20%!important;
+    flex: 0 0 20%!important;
+    max-width: 20%!important;
+    transition: 0.8s ease;
+    
+  }
+  .member-space-sidebar{
+    position: fixed;
+    
+   
+  }
+  .temp-shop-section-template {
+    width: 72%;
+    background-color: white;
+    padding: 0 40px;
+  }
+  .user-rubrique{
+    cursor: pointer;
+    font-size: 10px;
+    color: white;
+    font-family: 'PoppinsBold';
+    margin-top: 5%;
+  }
+  .user-rubrique-selected{
+    cursor: pointer;
+    font-size: 10px ;
+    color: #FB9D19;
+    font-family: 'PoppinsBold';
+    margin-top: 5%;
+  }
+  .member-space-sidebar-mobile{
+    position: fixed;
+    background-color: #181144;
+    min-height: 100vh;
+  }
+  .button-sauvgarder-user-information{
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .button-sauvgarder-user-template{
+
+    width: 270%;
+    position: relative;
+    left: -80%;
+   
+  }
+  .button-sauvgarder-user-product{
+    align-items: center;
+    width: 140%;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    left: -30%;
+    position: relative;
+   
+  }
+  .button-sauvgarder-user-domaine{
+    align-items: center;
+    width: 150%;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    position: relative;
+    left: -30%;
+  }
+  .row-user-information-domaine{
+    width: 87%;
+    position: relative;
+    right: 5%;
+   }
+  .template-section-title{
+    color: #181143;
+    font-family: "PoppinsBold";
+    font-size: 15px;
+    width: 208px;
+    position: relative;
+    right: 25px;
+  
+  }
+  .template-section-modif{
+    color: #181143;
+    font-family: "PoppinsBold";
+    font-size: 10px;
+    width: 220px;
+    position: relative;
+    right: 25px;
+  
+  }
+  .temp-shop-show-all-icon {
+    font-size: 12px;
+    position: relative;
+    color: #181143;
+    left: 1px;
+    top: -7px;
+  }
+  .temp-shop-show-all:hover, .temp-shop-show-all {
+    display: block;
+    text-align: center;
+    font-family: "PoppinsSemiBold";
+    font-size: 17px;
+    position: relative;
+    
+    color: #181143;
+    text-decoration: none;
+    padding-top: 50px;
+  }
+  .arrow-size {
+    max-width: 40%;
+    position: relative;
+    right: -55%;
+  }
+  .btn-slider {
+    font-size: 15px;
+    width: 30%;
+    padding: 0;
+  }
+  .slide img {
+    max-width: 140%;
+  }
+  .carousel {
+    width: 100%;
+    margin-top: 100px auto;
+    margin-bottom: 50px;
+    padding: 0;
+  }
+ .carousel-global{
+  position: relative;
+  width: 220px;
+  right: 50px;
+ }
+ .member-space-update-text-template{
+  color: #036CAC;
+  font-family: poppins;
+  font-weight: 400;
+  font-size: 12px;
+ 
+  letter-spacing: 1.2px;
+  cursor: pointer;
+ 
+}
+
+.text-pack {
+  font-family: "GilroyMedium";
+  color: white;
+  font-size: 18px;
+  margin: auto;
+  padding: 0 5%;
+  left: 2%;
+  right: 2%;
+  top: 40%;
+  text-align: left;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-devenir-partenaire{
+  color: #181143;
+  font-family: "PoppinsBold";
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 208px;
+  position: relative;
+  left: -3%;
+}
+.row-devenir-partenaire{
+  width: 120%;
+  margin-bottom: 1em;
+  position: relative;
+  left: -3%;
+}
+.button-sauvgarder-user-partenanire{
+
+  align-items: center;
+  width: 110%;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  position: relative;
+  left: -3%;
+}
+.login-form-button {
+  align-items: center;
+  justify-content: center;
+  padding-top: 15%;
+  padding-bottom: 5%;
+  width: 130%;
+  position: relative;
+  left: -15%;
+}
+.register-form-button {
+  align-items: center;
+
+  justify-content: center;
+  width: 130%;
+  position: relative;
+  left: -15%;
+
+
+  
+}
+.blue-page-image {
+  width: 155%;
+  margin-right: 50%;
+  position: relative;
+  right: 100%;
+  padding-top: 3%;
+
+}
+.row-login-form{
+  width: 80%;
+
+  position: relative;
+  left: 10%;
+}
+.register-form-title{
+  font-size: 25px;
+}
+.code-form-content {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.user-confirmation-regener-code-message{
+  font-size: 11px;
+}
+.block-input {
+ 
+  gap: 25px;
+  
+}
 }
 
 
 
+
+
+
+
+
+
+
+
+.ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub{
+  background-color: #181144 !important;
+}
+.member-space-sidebar{
+
+}
+
+.ant-layout-sider {
  
+  justify-content: center;
  
+  min-width: 100%;
+  width: 100% ;
+  flex: 0 0 60%;
+  max-width: 100%;
+  transition: 0.8s ease;
+
+}
+.ant-layout-sider-collapsed{
+  min-width: 6.4%;
+  width: 6.4%;
+  flex: 0 0 6.4%;
+  max-width: 6.4%;
+  transition: 0.8s ease;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  border-left: 5px solid white;
+  background-color: unset;
+  
+}
+.member-space-sidebar{
+  position: fixed;
+  background-color: #181144;
+  min-height: 100vh;
+ 
+}
+
+.member-space-logout-icon{
+  position: fixed;
+  right: 3%;
+  top: 15px;
+  max-width: 25px;
+  cursor: pointer;
+}
+
+.sidebar-icon{
+  align-self: baseline;
+  justify-content: center!important;
+}
+.member-space .ant-menu-root.ant-menu-inline{
+  color: white;
+}
+
+.member-space .ant-menu-title-content {
+  color: white;
+  font-family: poppins;
+  font-weight: 300;
+}
+.ant-menu-inline.ant-menu-root .ant-menu-item, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
+  display: flex;
+  align-items: center;
+  
+  transition: border-color 0.3s, background 0.3s, padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+
+.ant-menu-root.ant-menu-inline-collapsed .ant-menu-item > .ant-menu-inline-collapsed-noicon, .ant-menu-root.ant-menu-inline-collapsed .ant-menu-submenu .ant-menu-submenu-title > .ant-menu-inline-collapsed-noicon {
+  font-size: 16px;
+  text-align: center;
+}
+
+.user-rubrique{
+  cursor: pointer;
+  font-size: 30px;
+  color: white;
+  font-family: 'PoppinsBold';
+  margin-top: 5%;
+}
+.user-rubrique-selected{
+  cursor: pointer!important;
+  font-size: 30px;
+  color: #FB9D19!important;
+  font-family: 'PoppinsBold'!important;
+  margin-top: 5%!important;
+}
+.ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child){
+  margin-bottom: 30px !important;
+}

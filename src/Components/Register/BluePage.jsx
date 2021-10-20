@@ -12,11 +12,28 @@ import Paiement from "./Profile/Paiement";
 import Template from "./Profile/Template";
 import { apiURL } from "../../Config/config";
 import Livraison from "./Profile/Livraison";
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 
-
+import {
+    MenuOutlined,
+    ArrowLeftOutlined,
+  } from '@ant-design/icons';
 
 const { TextArea } = Input;
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
 const BluePage = (props) => {
+    const [collapsed, setCollapsed] = useState(false)
+    const [current, setCurrent] = useState(0)
+   
     const [steps, setSteps] = useState(4)
     const [fileList, setFileList] = useState()
     const [formValues, setFormValues] = useState([{ categorie: "",}])
@@ -53,7 +70,21 @@ const BluePage = (props) => {
     const [userLivraison, setuserLivraison] = useState("")
     const [userTemplate, setuserTemplate] = useState("")
     const [fileRne, setFileRne] =useState()
-
+    const [dimensions, setDimensions] = React.useState({ 
+      height: window.innerHeight,
+      width: window.innerWidth
+    })
+  
+  useEffect(() => {
+   const   handleResize =()=> {
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          })
+    }
+        window.addEventListener('resize', handleResize)
+  }, []);
+  console.log("dimenssion6",dimensions);
 
     useEffect(() => {
         console.log("hereeee");
@@ -404,6 +435,36 @@ const BluePage = (props) => {
                
             }
         }
+          const PersonalInfo = () =>{
+            setCurrent({
+              current : 0
+            })
+          }
+          const PersonalDomaine = () =>{
+            setCurrent({
+              current : 1
+            })
+          }
+          const PersonalTemplate = () =>{
+            setCurrent({
+              current : 2
+            })
+          }
+          const PersonalProduct = () =>{
+            setCurrent({
+              current : 3
+            })
+          }
+          const PersonalPayment = () =>{
+            setCurrent({
+              current : 4
+            })
+          }
+          const PersonalLivraison = () =>{
+            setCurrent({
+              current : 5
+            })
+          }
 
     const onChangeInfoGeneralUser =(value,key,index)=>{
         let aux ={...infoGen}
@@ -555,6 +616,8 @@ const BluePage = (props) => {
       ]; 
 
 
+    const toggle = () => setCollapsed(!collapsed);
+
     const saveModificationInfoGen =async()=>{
         const ERROR = [...validation.error]
         const ERROR_MSG=[...validation.errorMsg]
@@ -596,6 +659,11 @@ const BluePage = (props) => {
             setInfoGen({rne:info.originFileOb})
         },
         }
+
+    const onCollapse = collapsed => {
+        console.log(collapsed);
+        setCollapsed(collapsed)
+      };
     
     console.log("infoooo",infoGen);
     /****************************infoGenaral **************/
@@ -603,30 +671,50 @@ const BluePage = (props) => {
 
       
         return(
-            <Row>
-            <div  className="blue-page-user-inforamtion">
-                <div className="content-blue-page">
-                <Row className={steps && steps == 1?"user-rubrique-selected": "user-rubrique" }>
-                   <Col onClick={changeStepsOne}> Infos générales</Col>
-                </Row>
-                <Row className={steps && steps == 2?"user-rubrique-selected":"user-rubrique" } onClick={changeStepsTwo}>
-                    Domaine
-                </Row>
-                <Row className={steps && steps == 3?"user-rubrique-selected": "user-rubrique"} onClick={changeStepsThree}>
-                    Template
-                </Row>
-                <Row className={steps && steps == 4?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsFour}>Produit</Col>
-                </Row>
-                <Row className={steps && steps == 5?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsFive}>Paiement</Col>
-                </Row>
-                <Row className={steps && steps == 6?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsSix}>Livraison</Col>
-                </Row>
-                </div>
-            </div>
-            {steps && steps == 1 ? <InfoGeneral getAllUserInformation={getAllUserInformation} userInformation={infoGen}
+
+               <div>
+                {/* member space section */}
+                <Layout className="member-space">
+           
+                    <Sider width="400px" trigger={null} collapsible collapsed={collapsed} className={dimensions.width> 525?"member-space-sidebar":"member-space-sidebar-mobile"}>
+                    <div className="logo" />                         
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>                                    
+                        <Menu.Item style={{color:"white"}} key="1">
+                        {React.createElement(collapsed ? MenuOutlined : ArrowLeftOutlined, {
+                        className: 'trigger sidebar-icon',
+                        onClick: toggle, 
+                        })}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="2" onClick={changeStepsOne} className={steps && steps == 1?"user-rubrique-selected": "user-rubrique"}> 
+                         {"Infos générale"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="3" onClick={changeStepsTwo} className={steps && steps == 2?"user-rubrique-selected": "user-rubrique"}>
+                        {"Domaine"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="4" onClick={changeStepsThree} className={steps && steps == 3?"user-rubrique-selected": "user-rubrique"}>
+                        {"Template"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="5" onClick={changeStepsFour} className={steps && steps == 4?"user-rubrique-selected": "user-rubrique"}>
+                        {"Produit"}
+                        
+                  
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="6" onClick={changeStepsFive} className={steps && steps == 5?"user-rubrique-selected": "user-rubrique"}>
+                  {"Paiement"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="7" onClick={changeStepsSix} className={steps && steps == 6?"user-rubrique-selected": "user-rubrique"}>
+                        
+                 {"Livraison"}
+          
+                        </Menu.Item>
+                     
+                    </Menu>
+                    </Sider>
+                     
+                    <Layout className="">
+                    <Content className={collapsed ? 'member-space-content-collapsed' : 'member-space-content'}>
+                        
+                        {steps && steps == 1 ? <InfoGeneral getAllUserInformation={getAllUserInformation} userInformation={infoGen}
             onChangeInfoGeneralUser={onChangeInfoGeneralUser} 
             infoGenError={infoGenError} infoGenErrorMsg={infoGenErrorMsg} 
             defaultFile={defaultFile}
@@ -656,8 +744,13 @@ const BluePage = (props) => {
 
             {steps && steps == 6 ? <Livraison onChangeLivraison={onChangeLivraison} handleSaveLivraison={handleSaveLivraison} userLivraison={userLivraison}
             getLivraisonUser={getLivraisonUser} /> : null}
+                       
+                    </Content>
+                    </Layout>
+                </Layout>
+            </div>
 
-            </Row>
+
         );
        
 

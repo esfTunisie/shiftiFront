@@ -197,20 +197,20 @@ const verifEmail =async(value)=>{
               }}
              
             >
-            <Form.Item>
+            <Form.Item className="row-login-form">
               <Input placeholder='Nom et prenom' onChange={(e)=>onChangeStepOneData(e.target.value,'nomPrenom',0)} className="register-form-input-style" value={step.nomPrenom} />
               {/* {nomPrenomError&&<div className="error-user-steps" style={{color:'red'}}>{nomPrenomError}</div>} */}
               {stepError[0]&&<div className='registration-error-message' style={{color:'red'}}>{stepErrorMsg[0]}</div>}
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="row-login-form">
               <Input placeholder='Adresse email' onChange={(e)=>onChangeStepOneData(e.target.value,'email',1)} style={existEmail ==true ?{borderColor:"red"}: null} className="register-form-input-style" value={step.email} />
               {stepError[1]&&<div className='registration-error-message' style={{color:'red'}}>{stepErrorMsg[1]}</div>}
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="row-login-form">
             <Input.Password  placeholder='Mot de passe' onChange={(e)=>onChangeStepOneData(e.target.value,'password',2)} className="register-form-input-style" />
               {stepError[2]&&<div className='registration-error-message' style={{color:'red'}}>{stepErrorMsg[2]}</div>}
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="row-login-form">
               <Input.Password  placeholder='Confirmer votre mot de passe' onChange={(e)=>onChangeStepOneData(e.target.value,'confirmPassword',3)} className="register-form-input-style" />
               {stepError[3]&&<div className='registration-error-message' style={{color:'red'}}>{stepErrorMsg[3]}</div>}
             </Form.Item> 

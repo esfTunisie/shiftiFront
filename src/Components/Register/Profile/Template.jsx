@@ -18,6 +18,10 @@ const Domaine = (props) => {
 
     const [value, setValue] = React.useState(1);
     const [modification, setmodification] = useState(true)
+    const [dimensions, setDimensions] = React.useState({ 
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
 
 
     const  modificate = () => {
@@ -122,11 +126,11 @@ const Domaine = (props) => {
     return(
        
         <div className="temp-shop-section-template">
-              <Row><span className="member-space-update-text" style={{paddingBottom:"20px"}} onClick={modificate}>{modification ? 'modifier le choix du template' : 'Activer les modifications'} </span></Row>
+              <Row className="template-section-modif"><span className="member-space-update-text-template" style={{paddingBottom:"20px"}} onClick={modificate}>{modification ? 'modifier le choix du template' : 'Activer les modifications'} </span></Row>
                         <h2 className="template-section-title">
                             Selectionner une template 
                         </h2>  
-                        <center>                     
+                        {dimensions.width > 525 ? <center>                     
                         <div className="carousel">
                             <Slider ref={slider => (slider = slider)} {...settings}>
                                 {images.map((img, idx) => (
@@ -142,8 +146,26 @@ const Domaine = (props) => {
                             </Slider>
                         </div>
                         <a href="#" className="temp-shop-show-all">Voir tout <RightOutlined className="temp-shop-show-all-icon"/> </a>
-                        </center>
-                        <Row className='button-sauvgarder-user-information'><Button disabled={modification} onClick={props.handleSaveTemplate}  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                        </center>:
+                        <div className="carousel-global">
+                            <div className="carousel">
+                            <Slider ref={slider => (slider = slider)} {...settings}>
+                                {images.map((img, idx) => (
+                                    
+                                <Radio.Group  disabled={modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
+                                  <Radio value={idx}>  <img src={img} alt={img}  /> 
+                                        <Button className="btn-slider" onClick={() =>template(idx)}>
+                                            Voir
+                                        </Button>
+                                    </Radio>
+                                </Radio.Group>
+                                ))}
+                            </Slider>
+                        </div>
+                        <a href="#" className="temp-shop-show-all">Voir tout <RightOutlined className="temp-shop-show-all-icon"/> </a>
+                        </div> 
+                        }
+                        <Row className='button-sauvgarder-user-template'><Button disabled={modification} onClick={props.handleSaveTemplate}  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
 
         </div>
     )

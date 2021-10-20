@@ -57,7 +57,7 @@ const Livraison = (props) => {
                     </Radio.Group>
                     </div>  
               
-                <Row className='button-sauvgarder-user-information'><Button  disabled={modification} onClick={props.handleSaveLivraison} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-livraison'><Button  disabled={modification} onClick={props.handleSaveLivraison} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
             </div> 
         </div>
     )
