@@ -833,10 +833,11 @@
 
   .newsletter {
     position: relative;
-    top: 40%;
+    top: 17%;
     color: #181143;
     text-decoration: underline;
     font-size: 18px;
+    left:4%
   }
 
   .button-footer:hover, .button-footer {
@@ -861,6 +862,12 @@
   }
 
   .contact-footer {
+    color: #181143;
+    font-family: "PoppinsRegular";
+    font-size: 18px;
+    padding-bottom: 0.3em;
+  }
+  .contact-footerr {
     color: #181143;
     font-family: "PoppinsRegular";
     font-size: 18px;
@@ -2599,6 +2606,22 @@ margin-right: 5%;
   gap: 25px;
   
 }
+
+.icon-footer {
+  color: #EC1577;
+  font-size: 15px;
+  padding-right: 3px;
+}
+.footer-contact{
+  margin-left: 17%;
+}
+.contact-footerr {
+  color: #181143;
+  font-family: "PoppinsRegular";
+  font-size: 13px;
+  padding-bottom: 0.3em;
+}
+
 }
 
 

@@ -175,13 +175,13 @@ const Contact = (props) => {
                     <br/><br/>
                     <div className="footer-contact">
                             <span className="icon-inline">
-                                <EnvironmentFilled className="icon-footer" /><p className="contact-footer"> Résidence El Badr, Avenue Hédi Nouira, Ariana 2037, Tunisie</p>
+                                <EnvironmentFilled className="icon-footer" /><p className="contact-footerr"> Résidence El Badr, Avenue Hédi Nouira, Ariana 2037, Tunisie</p>
                                 </span>
                                 <span className="icon-inline">
-                                <MailFilled className="icon-footer" /><p className="contact-footer">  hello@shifti.co</p>
+                                <MailFilled className="icon-footer" /><p className="contact-footerr">  hello@shifti.co</p>
                                 </span>
                                 <span className="icon-inline">
-                                <PhoneFilled className="icon-footer" /><p className="contact-footer"> +216 20 28 69 66</p>
+                                <PhoneFilled className="icon-footer" /><p className="contact-footerr"> +216 20 28 69 66</p>
                             </span>
                     </div>
                     {dimensions.width <= 525 ?<div className="contact-right-card">

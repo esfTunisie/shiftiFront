@@ -105,7 +105,7 @@ const Footer = (props) => {
                                    
                                    <p className="contact-footer"> Services </p>
                                 </Menu.Item>
-                                <Menu.Item onClick={() => goOffre()}>
+                                <Menu.Item >
                                  
                                  <p className="contact-footer"> Offres </p>
                                </Menu.Item>

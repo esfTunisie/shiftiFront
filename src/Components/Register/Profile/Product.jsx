@@ -158,6 +158,7 @@ const Product = (props) => {
     //     }
     // }
     // console.log("photo", photo);
+    console.log("error product",props.productErrorMsg);
     
     return(
             <div className="user-information-pages">
@@ -186,7 +187,8 @@ const Product = (props) => {
                             <Option value="Les produits artisanaux et fabriqués à la main">{'Les produits artisanaux et fabriqués à la main'}</Option>
                             <Option value="Alimentation et boissons">{'Alimentation et boissons'}</Option>
                             
-                    </Select>               
+                    </Select>
+                    {props.productError[5]&&<div style={{color:'red'}}>{props.productErrorMsg[5]}</div>}                
                 </Form.Item>
             </Col>
             <Col  >
@@ -214,9 +216,9 @@ const Product = (props) => {
                             <Option value="Articles pour bébés et enfants">{'Articles pour bébés et enfants'}</Option>
                             <Option value="Les technologies">{'Les technologies'}</Option>
                             <Option value="Les produits artisanaux et fabriqués à la main">{'Les produits artisanaux et fabriqués à la main'}</Option>
-                            <Option value="Alimentation et boissons">{'Alimentation et boissons'}</Option>
-                            
-                    </Select>               
+                            <Option value="Alimentation et boissons">{'Alimentation et boissons'}</Option>  
+                    </Select>  
+                    {props.productError[5]&&<div style={{color:'red'}}>{props.productErrorMsg[5]}</div>}             
                 </Form.Item>
             </Col>
             <Col  >
@@ -240,7 +242,7 @@ const Product = (props) => {
                 <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 15: 21}>
                 <Form.Item>
                     <Input placeholder="Produit"  onChange={(e)=>props.handleChangeProduits(index, e.target.value)}  className='row-user-information-info-generale-input' />
-                   
+                    {props.productError[0]&&<div style={{color:'red'}}>{props.productErrorMsg[0]}</div>}
                 </Form.Item>
                  
                 </Col>
@@ -249,6 +251,7 @@ const Product = (props) => {
             {/* <Upload {...image}  onChange={(info)=>props.onUploadPhoto(info.fileList[0].originFileObj, index)} > */}
             <Upload {...image}  onChange={(info)=>props.onUploadPhoto(info.fileList, index)}  >
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                {props.productError[1]&&<div style={{color:'red'}}>{props.productErrorMsg[1]}</div>}
             </Upload>
             </Col>
             </Row>
@@ -271,6 +274,7 @@ const Product = (props) => {
                 <Col className="row-user-inforamtion-style-product"  span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                         <TextArea className='row-user-information-info-generale-input-text-area' rows={4} placeholder='Description' onChange={(e)=>props.handleChangeDescription(index, e.target.value)} />
+                        {props.productError[2]&&<div style={{color:'red'}}>{props.productErrorMsg[2]}</div>}
                     </Form.Item>
                 </Col>
                 <Col className="user-information-categorie-btn-plus-none">
@@ -283,6 +287,7 @@ const Product = (props) => {
                 <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                         <Input placeholder="Prix" className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangePrix(index, e.target.value)} />
+                        {props.productError[3]&&<div style={{color:'red'}}>{props.productErrorMsg[3]}</div>}
                     </Form.Item>
                 </Col>
                 <Col className="user-information-categorie-btn-plus-none">
@@ -295,6 +300,7 @@ const Product = (props) => {
                 <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                     <Input placeholder="Quantité" className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangeQuantite(index, e.target.value)} />
+                    {props.productError[4]&&<div style={{color:'red'}}>{props.productErrorMsg[4]}</div>}
                     </Form.Item>
                 </Col>
                 <Col className="user-information-categorie-btn-plus-none">
