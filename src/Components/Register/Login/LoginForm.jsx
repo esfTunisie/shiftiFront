@@ -17,7 +17,21 @@ const LoginPage =(props)=>{
   const [dataError, setDataError] = useState([true,true]);
   const [dataErrorMsg, setDataErrorMsg] = useState(['','']);
   const [error, setError] = useState(false)
+  const [dimensions, setDimensions] = React.useState({ 
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
 
+useEffect(() => {
+ const   handleResize =()=> {
+        setDimensions({
+          height: window.innerHeight,
+          width: window.innerWidth
+        })
+  }
+      window.addEventListener('resize', handleResize)
+}, []);
+console.log("dimenssionlogin",dimensions);
 
   
   const onChangeData=(value,key,index)=>{
@@ -159,11 +173,11 @@ const LoginPage =(props)=>{
                 remember: true,
               }} 
             >
-              <Form.Item>
+              <Form.Item className="row-login-form">
                     <Input placeholder='Adresse email'onChange={(e)=>onChangeData(e.target.value,'email',0)}  className="register-form-input-style" value={data.email} />
                     {dataError[0]&&<div className='registration-error-message' style={{color:'red'}}>{dataErrorMsg[0]}</div>}
               </Form.Item>
-              <Form.Item>
+              <Form.Item className="row-login-form">
                     <Input.Password  placeholder='Mot de passe' onChange={(e)=>onChangeData(e.target.value,'password',1)} className="register-form-input-style" value={data.password} />
                     {dataError[1]&&<div className='registration-error-message' style={{color:'red'}}>{dataErrorMsg[1]}</div>}
               </Form.Item>

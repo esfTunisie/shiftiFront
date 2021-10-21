@@ -25,7 +25,21 @@ const Contact = (props) => {
     const [step, setStep] = useState({name:'',entreprise:'',mail:'',message:'', validation:{error:[true,true,true,true], errorMsg:["required","required","required","required"]}});
     const [stepError, setStepError] = useState([true,true,true, true]);
     const [stepErrorMsg, setstepErrorMsg] = useState(['','','','']);
-
+    const [dimensions, setDimensions] = React.useState({ 
+      height: window.innerHeight,
+      width: window.innerWidth
+    })
+  
+  useEffect(() => {
+   const   handleResize =()=> {
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          })
+    }
+        window.addEventListener('resize', handleResize)
+  }, []);
+  console.log("dimenssion2",dimensions);
 
 
     const onChangeStepOneData=(value,key,index)=>{
@@ -81,6 +95,8 @@ const Contact = (props) => {
 
 
     const Send =async()=>{
+        setSuccess('')
+        setError('')
         const ERROR = [...step.validation.error]
         const ERROR_MSG=[...step.validation.errorMsg]
         setStepError(ERROR)
@@ -99,37 +115,40 @@ const Contact = (props) => {
             body: formdata
           };
           const data = await fetch(apiURL+"/addContact", requestOptions);
-          console.log("code",data.status)
+         
           if(data.status == 201){
             setSuccess('votre message a été envoyé avec succès')
-           
             window.location.reload(false);
-        
           }
-          if(data.status !== 201){
+          if(data.status == 400){
             setError('email existe déjà')
-            
           }
+          if(data.status !== 201 && data.status !== 400){
+            setError('error')
+          }
+
+
+
+
         }
     }
     
         return(
            
-            <Row>
+            <Row style={{overflowX:"hidden"}}>
                 
-             <div className="devenir-partenaire">
-                    <div className="img-devenir-partenaire-page-bleu">
-                        <img className="devenir-partenaire-img" src={imageShifty} />
-                    </div>
-            </div>
-            <div className="contact-right-content">
-                
-            <div className="form-contact">
-                <Row className="title-contact">
-                        <div >Contact</div>
-                </Row>
+                <div className="devenir-partenaire">
+                        <div className="img-devenir-partenaire-page-bleu">
+                            <img className="devenir-partenaire-img" src={imageShifty} />
+                        </div>
+                </div>
+              <div className="contact-right-content">
+                      <div className="form-contact">
+                        <Row className="title-contact">
+                                <div >Contact</div>
+                        </Row>
                         <Row className="row-contact">
-                            <Input placeholder="Nom et prénom" className='row-user-information-info-generale-input'onChange={(e)=>onChangeStepOneData(e.target.value,'name',0)} />   
+                            <Input placeholder="Nom et prénom" className='row-user-information-info-generale-input' onChange={(e)=>onChangeStepOneData(e.target.value,'name',0)} />   
                             {stepError[0]&&<div style={{color:'red'}}>{stepErrorMsg[0]}</div>}
                         </Row>
                         <Row className="row-contact">
@@ -147,29 +166,31 @@ const Contact = (props) => {
                         </Row>
                         <Row className='button-sauvgarder-user-information'>
                         <Button  className='button-send-contact-style' onClick={() => Send()}>Envoyer le message</Button>
-                    </Row>
-                    <Row className='confirmation-error-message'>
-                {error&&<div style={{color:'red'}}>{error}</div>}
-                {success&&<div style={{color:'success'}}>{success}</div>}
-                </Row>
+                        </Row>
+                        <Row className='confirmation-error-message'>
+                        {error&&<div style={{color:'red'}}>{error}</div>}
+                        {success&&<div style={{color:'success'}}>{success}</div>}
+                        </Row>
                     </div>
                     <br/><br/>
                     <div className="footer-contact">
-                    <span className="icon-inline">
-                                <EnvironmentFilled className="icon-footer" /><p className="contact-footer"> Résidence El Badr, Avenue Hédi Nouira, Ariana 2037, Tunisie</p>
+                            <span className="icon-inline">
+                                <EnvironmentFilled className="icon-footer" /><p className="contact-footerr"> Résidence El Badr, Avenue Hédi Nouira, Ariana 2037, Tunisie</p>
                                 </span>
                                 <span className="icon-inline">
-                                <MailFilled className="icon-footer" /><p className="contact-footer">  hello@shifti.co</p>
+                                <MailFilled className="icon-footer" /><p className="contact-footerr">  hello@shifti.co</p>
                                 </span>
                                 <span className="icon-inline">
-                                <PhoneFilled className="icon-footer" /><p className="contact-footer"> +216 20 28 69 66</p>
+                                <PhoneFilled className="icon-footer" /><p className="contact-footerr"> +216 20 28 69 66</p>
                             </span>
                     </div>
-                            
+                    {dimensions.width <= 525 ?<div className="contact-right-card">
+                      <img  src={map} height={"100%"} /> 
+                    </div>:null }     
                 </div>
-                <div className="contact-right-card">
-                <img  src={map} /> 
-                </div>         
+                {dimensions.width > 525 ?<div className="contact-right-card">
+                      <img  src={map} height={"100%"} /> 
+                    </div>:null }      
             </Row>
             
           

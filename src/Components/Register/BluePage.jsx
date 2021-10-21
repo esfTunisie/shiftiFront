@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
 import imageShifty from "../../assets/img/Ellipse1.svg"
 import imageShiftyPoint from "../../assets/img/1.svg"
-import { Input, Row, Col, Button } from 'antd';
+import { Input, Row, Col, Button, Empty } from 'antd';
 import imageShiftyLogin from "../../assets/img/imageLogin.png"
 import InfoGeneral from "./Profile/InfoGeneral";
 import Domaine from "./Profile/Domaine";
@@ -11,12 +11,30 @@ import Product from "./Profile/Product";
 import Paiement from "./Profile/Paiement";
 import Template from "./Profile/Template";
 import { apiURL } from "../../Config/config";
+import Livraison from "./Profile/Livraison";
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 
-
+import {
+    MenuOutlined,
+    ArrowLeftOutlined,
+  } from '@ant-design/icons';
 
 const { TextArea } = Input;
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
 const BluePage = (props) => {
-    const [steps, setSteps] = useState(1)
+    const [collapsed, setCollapsed] = useState(false)
+    const [current, setCurrent] = useState(0)
+   
+    const [steps, setSteps] = useState(4)
     const [fileList, setFileList] = useState()
     const [formValues, setFormValues] = useState([{ categorie: "",}])
     const [produit, setProduit] = useState([{ produit: "",}])
@@ -24,11 +42,15 @@ const BluePage = (props) => {
     const [categorie, setCategorie] = useState("")
     const [produits, setProduits] = useState("")
     const [type, setType] = useState("")
+    const [indextemplate, setIndextemplate] = useState("")
+    const [typelivraison, setTypelivraison] = useState("")
     const [description, setDescription] = useState("")
     const [prix, setPrix] = useState("")
     const [quantite,setQuantite] = useState("")
     const [photo,setPhoto] = useState("")
     const [ValuePaiement,setValuePaiement] = useState("")
+    const [ValueLivraison,setValueLivraison] = useState("")
+    const [ValueTemplate,setValueTemplate] = useState("")
     const [ValueDomaine,setValueDomaine] = useState("")
     const [userInformation,setuserInformation] = useState("")
     const [userDomaine,setuserDomaine] = useState()
@@ -44,15 +66,41 @@ const BluePage = (props) => {
 
     const [infoGenError, setinfoGenError] = useState([true,true,true, true,true,true,true, true,true,true,true, true,true,true]);
     const [infoGenErrorMsg, setinfoGenErrorMsg] = useState(['','','', '','','','', '','','','', '','','']);
+
+    const [stepProduct, setStepproduct] = useState({produit:'',photo:'',description:'',prix:'',quantite:'',categorie:''});
+    const [validationProduct, setValidationProduct]= useState({error:[true,true,true,true,true,true], errorMsg:["required","required","required","required","required","required"]})
+    const [productError, setProductError] = useState([true,true, true,true,true,true]);
+    const [productErrorMsg, setproductErrorMsg] = useState(['','','','','','']);
+
+   
+
     const [userPaiement, setuserPaiement] = useState("")
+    const [userLivraison, setuserLivraison] = useState("")
+    const [userTemplate, setuserTemplate] = useState("")
     const [fileRne, setFileRne] =useState()
+    const [dimensions, setDimensions] = React.useState({ 
+      height: window.innerHeight,
+      width: window.innerWidth
+    })
+  
+  useEffect(() => {
+   const   handleResize =()=> {
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          })
+    }
+        window.addEventListener('resize', handleResize)
+  }, []);
+  console.log("dimenssion6",dimensions);
 
 
     useEffect(() => {
         console.log("hereeee");
         getAllUserInformation()
         getPaimentUser()
-       
+        getLivraisonUser()
+        getTemplateUser()
     }, []);
 
     const stepsProps = props.auth.steps
@@ -88,12 +136,7 @@ const BluePage = (props) => {
           console.log("info",info);
         },
       };
-      const onUploadPhoto =( info, index)=>{
-        const updatedArray = [...photo];
-        updatedArray[index] = info;
-        setPhoto(updatedArray)
-      }
-
+     
 
       
       const addFormFields = () => {
@@ -106,92 +149,276 @@ const BluePage = (props) => {
       
 
 
-    const handleChangeCategorie =(index, newValue)=>{
-        const updatedArray = [...categorie];
-        updatedArray[index] = newValue;
-        setCategorie(updatedArray)
-    }
+   
     const handleChangeProduits =(index, newValue)=>{
+      let auxValidation = {...validationProduct}
         const updatedArray = [...produits];
         updatedArray[index] = newValue;
+        if(updatedArray[0] == "" || updatedArray == null){
+          console.log("success");
+          auxValidation.error[0]=true
+          auxValidation.errorMsg[0]='required'
+        }else{
+          console.log("failed");
+          auxValidation.error[0]=false
+          auxValidation.errorMsg[0]=''
+        }
+        console.log("produits",updatedArray);
         setProduits(updatedArray)
     }
+    const onUploadPhoto =( info, index)=>{
+      let auxValidation = {...validationProduct}
+      const updatedArray = [...photo];
+      updatedArray[index] = info;
+      console.log("hereeee",updatedArray);
+      if(updatedArray[0] == "" || updatedArray == null){
+        console.log("success");
+        auxValidation.error[1]=true
+        auxValidation.errorMsg[1]='required'
+      }else{
+        console.log("failed");
+        auxValidation.error[1]=false
+        auxValidation.errorMsg[1]=''
+      }
+      console.log("photo",updatedArray);
+      setPhoto(updatedArray)
+    }
+
     const handleChangeType =(index, newValue)=>{
+     
         const updatedArray = [...type];
         updatedArray[index] = newValue;
+       
         setType(updatedArray)
     }
     const handleChangeDescription =(index, newValue)=>{
+        let auxValidation = {...validationProduct}
         const updatedArray = [...description];
         updatedArray[index] = newValue;
+        if(updatedArray[0] == "" || updatedArray == null){
+          
+          auxValidation.error[2]=true
+          auxValidation.errorMsg[2]='required'
+        }else{
+          
+          auxValidation.error[2]=false
+          auxValidation.errorMsg[2]=''
+        }
+        console.log("description",updatedArray);
         setDescription(updatedArray)
     }
     const handleChangePrix =(index, newValue)=>{
+      let auxValidation = {...validationProduct}
         const updatedArray = [...prix];
         updatedArray[index] = newValue;
+        if(updatedArray[0] == "" || updatedArray == null){
+         
+          auxValidation.error[3]=true
+          auxValidation.errorMsg[3]='required'
+        }else{
+        
+          auxValidation.error[3]=false
+          auxValidation.errorMsg[3]=''
+        }
+       
+        setValidationProduct(auxValidation)
         setPrix(updatedArray)
     }
     const handleChangeQuantite =(index, newValue)=>{
+        let auxValidation = {...validationProduct}
         const updatedArray = [...quantite];
         updatedArray[index] = newValue;
+        if(updatedArray[0] == "" || updatedArray == null){
+          
+          auxValidation.error[4]=true
+          auxValidation.errorMsg[4]='required'
+        }else{
+        
+          auxValidation.error[4]=false
+          auxValidation.errorMsg[4]=''
+        }
+        console.log("quantite",updatedArray);
+        setValidationProduct(auxValidation)
+
+        
         setQuantite(updatedArray)
     }
+    const handleChangeCategorie =(index, newValue)=>{
+      let auxValidation = {...validationProduct}
+      const updatedArray = [...categorie];
+      updatedArray[index] = newValue;
+      if(updatedArray[index] == "" || updatedArray == null){
+        console.log("success");
+        auxValidation.error[5]=true
+        auxValidation.errorMsg[5]='required'
+      }else{
+        console.log("failed");
+        auxValidation.error[5]=false
+        auxValidation.errorMsg[5]=''
+      }
+      console.log("categorie",updatedArray);
+      setValidationProduct(auxValidation)
+      setCategorie(updatedArray)
+  }
+    console.log("priiiix",validationProduct);
+
     const handleSaveForm =async()=>{
-        let formdata = new FormData()
+      console.log("here");
+     
+      const ERROR = [...validationProduct.error]
+      const ERROR_MSG=[...validationProduct.errorMsg]
+      setProductError(ERROR)
+      setproductErrorMsg(ERROR_MSG)
+
+
+      console.log("error", ERROR);
+     
+      if(!ERROR.includes(true)){
+                      console.log("type",type);
+                      let formdata =new FormData()
+                      produits.forEach(pd => {
+                        formdata.append('name[]', pd)
+                    });
+                    quantite.forEach(qu => {
+                        formdata.append('quantite[]', qu)
+                    });
+                    prix.forEach(pr => {
+                        formdata.append('prix[]', pr)
+                    });
+                      type && type ?type.forEach(typ => {
+                        formdata.append('type[]', typ)
+                    }):formdata.append('type[]', type);
+                    description.forEach(des => {
+                        formdata.append('description[]', des)
+                    });
+                    photo.forEach(ph => {
+                        console.log("phhhh",ph);
+                        ph.forEach(p =>{
+                            console.log("pppp",p);
+                            formdata.append('photo[]', p.originFileObj)
+                        })
+                        // formdata.append('photo[]', ph)
+                    });
+                      
+                     
+                     
+                      const requestOptions = {
+                        method: 'POST',
+                        body: formdata
+                      };
+                    
+                        const data = await fetch(apiURL+'/addProduit/'+props.auth.username,requestOptions);
+                        const dataJson = await data.json();
+                        console.log("here2",dataJson);
+                        if(data.status == 201){ 
+                          setQuantite("")
+                          setPrix("")
+                          setProduit([{ produit: "",}])
+                          setDescription("")
+                          setType("")
+                       
+                        }
+                        let formdataCategorie = new FormData()
+                        categorie.forEach(cat => {
+                            formdataCategorie.append('categorie[]', cat)
+                        });
+                        const requestOptionsCategorie = {
+                            method: 'POST',
+                            body: formdataCategorie
+                          };
+                        const dataCategorie = await fetch(apiURL+'/addCategorie/'+props.auth.username,requestOptionsCategorie);
+                        const dataJsonCategorie = await dataCategorie.json();
+                        
+                        if(dataCategorie.status == 201){ 
+                            console.log("sucesss");
+                            setCategorie([{ categorie: "",}])
+                            setQuantite("")
+                            setPrix("")
+                            setProduit([{ produit: "",}])
+                            setDescription()
+                            setType("")
+                            setSteps(4)
+                            window.location.reload()  
+                        }             
+      }
+  }  
+
+
+
+
+
+
+
+
+
+
+    // const handleSaveForm =async()=>{
+    //     let formdata = new FormData()
         
-        produits.forEach(pd => {
-            formdata.append('name[]', pd)
-        });
-        quantite.forEach(qu => {
-            formdata.append('quantite[]', qu)
-        });
-        prix.forEach(pr => {
-            formdata.append('prix[]', pr)
-        });
-        type.forEach(typ => {
-            formdata.append('type[]', typ)
-        });
-        description.forEach(des => {
-            formdata.append('description[]', des)
-        });
-        photo.forEach(ph => {
-            formdata.append('photo[]', ph)
-        });
-          const requestOptions = {
-            method: 'POST',
-            body: formdata
-          };
+    //     produits.forEach(pd => {
+    //         formdata.append('name[]', pd)
+    //     });
+    //     quantite.forEach(qu => {
+    //         formdata.append('quantite[]', qu)
+    //     });
+    //     prix.forEach(pr => {
+    //         formdata.append('prix[]', pr)
+    //     });
+    //     type.forEach(typ => {
+    //         formdata.append('type[]', typ)
+    //     });
+    //     description.forEach(des => {
+    //         formdata.append('description[]', des)
+    //     });
+    //     photo.forEach(ph => {
+    //         console.log("phhhh",ph);
+    //         ph.forEach(p =>{
+    //             console.log("pppp",p);
+    //             formdata.append('photo[]', p.originFileObj)
+    //         })
+    //         // formdata.append('photo[]', ph)
+    //     });
+    //       const requestOptions = {
+    //         method: 'POST',
+    //         body: formdata
+    //       };
         
-        const data = await fetch(apiURL+'/addProduit/'+props.auth.username,requestOptions);
-        const dataJson = await data.json();
-        console.log("dataaaa",dataJson);
-        if(data.status == 201){ 
-            console.log("sucesss");
-            setQuantite()
-            setPrix()
-            setProduits()
-            setDescription()
-            setType()
+    //     const data = await fetch(apiURL+'/addProduit/'+props.auth.username,requestOptions);
+    //     const dataJson = await data.json();
+    //     console.log("dataaaa",dataJson);
+    //     if(data.status == 201){ 
+    //         console.log("sucesss");
+    //         setQuantite("")
+    //         setPrix("")
+    //         setProduit([{ produit: "",}])
+    //         setDescription("")
+    //         setType("")
             
            
-        }
-        let formdataCategorie = new FormData()
-        categorie.forEach(cat => {
-            formdataCategorie.append('categorie[]', cat)
-        });
-        const requestOptionsCategorie = {
-            method: 'POST',
-            body: formdataCategorie
-          };
-        const dataCategorie = await fetch(apiURL+'/addCategorie/'+props.auth.username,requestOptionsCategorie);
-        const dataJsonCategorie = await dataCategorie.json();
+    //     }
+    //     let formdataCategorie = new FormData()
+    //     categorie.forEach(cat => {
+    //         formdataCategorie.append('categorie[]', cat)
+    //     });
+    //     const requestOptionsCategorie = {
+    //         method: 'POST',
+    //         body: formdataCategorie
+    //       };
+    //     const dataCategorie = await fetch(apiURL+'/addCategorie/'+props.auth.username,requestOptionsCategorie);
+    //     const dataJsonCategorie = await dataCategorie.json();
         
-        if(dataCategorie.status == 201){ 
-            console.log("sucesss");
-            setCategorie()
-            setSteps(5)  
-        }
-    }
+    //     if(dataCategorie.status == 201){ 
+    //         console.log("sucesss");
+    //         setCategorie([{ categorie: "",}])
+    //         setQuantite("")
+    //         setPrix("")
+    //         setProduit([{ produit: "",}])
+    //         setDescription()
+    //         setType("")
+    //          setSteps(4)
+    //          window.location.reload()  
+    //     }
+    // }
     console.log("photo", photo);
 
     /****************************product page ***************/
@@ -201,7 +428,13 @@ const BluePage = (props) => {
     const onChangePaiement = e => {
         setValuePaiement(e.target.value);
       };
-
+      const onChangeLivraison = e => {
+        setValueLivraison(e.target.value);
+      };
+      const onChangeTemplate = e => {
+          console.log("eeeeeee",e.target.value);
+        setValueTemplate(e.target.value);
+      };
     const getPaimentUser =async()=>{
         const requestOptions = {
             method: 'GET',
@@ -215,6 +448,32 @@ const BluePage = (props) => {
         }
     }  
 
+    const getLivraisonUser =async()=>{
+        const requestOptions = {
+            method: 'GET',
+          };
+        const data = await fetch(apiURL+'/getLivraisonUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+
+        console.log("dataaaa",dataJson);
+        if(data.status == 200){ 
+            setuserLivraison(dataJson)
+        }
+    }
+    const getTemplateUser =async()=>{
+        const requestOptions = {
+            method: 'GET',
+          };
+        const data = await fetch(apiURL+'/getTemplateUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+
+        console.log("datatemp",dataJson);
+        if(data.status == 200){ 
+            setuserTemplate(dataJson)
+            console.log("template",dataJson);
+        }
+    }
+
     const handleSavePaiement =async()=>{
         let formdata = new FormData()
         formdata.append('type', ValuePaiement)
@@ -227,7 +486,42 @@ const BluePage = (props) => {
         const dataJson = await data.json();
         console.log("dataaaa",dataJson);
         if(data.status == 201){ 
+            getPaimentUser()
             setSteps(6)
+        }
+    }
+
+
+    const handleSaveLivraison =async()=>{
+        let formdata = new FormData()
+        formdata.append('typelivraison', ValueLivraison)
+        const requestOptions = {
+            method: 'POST',
+            body: formdata
+          };
+
+        const data = await fetch(apiURL+'/addLivraisonUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+        console.log("datalivraison",dataJson);
+        if(data.status == 201){ 
+            getLivraisonUser()
+            setSteps(1)
+        }
+    }
+    const handleSaveTemplate =async()=>{
+        let formdata = new FormData()
+        formdata.append('indextemplate', ValueTemplate)
+        const requestOptions = {
+            method: 'POST',
+            body: formdata
+          };
+
+        const data = await fetch(apiURL+'/addTemplateUser/'+props.auth.username,requestOptions);
+        const dataJson = await data.json();
+        console.log("datatemplate",dataJson);
+        if(data.status == 201){
+            getTemplateUser() 
+            setSteps(4)
         }
     }
     
@@ -317,7 +611,7 @@ const BluePage = (props) => {
                
             }
         }
-
+    
     const onChangeInfoGeneralUser =(value,key,index)=>{
         let aux ={...infoGen}
         let auxValidation = {...validation}
@@ -468,6 +762,8 @@ const BluePage = (props) => {
       ]; 
 
 
+    const toggle = () => setCollapsed(!collapsed);
+
     const saveModificationInfoGen =async()=>{
         const ERROR = [...validation.error]
         const ERROR_MSG=[...validation.errorMsg]
@@ -509,6 +805,11 @@ const BluePage = (props) => {
             setInfoGen({rne:info.originFileOb})
         },
         }
+
+    const onCollapse = collapsed => {
+        console.log(collapsed);
+        setCollapsed(collapsed)
+      };
     
     console.log("infoooo",infoGen);
     /****************************infoGenaral **************/
@@ -516,30 +817,50 @@ const BluePage = (props) => {
 
       
         return(
-            <Row>
-            <div  className="blue-page-user-inforamtion">
-                <div className="content-blue-page">
-                <Row className={steps && steps == 1?"user-rubrique-selected": "user-rubrique" }>
-                   <Col onClick={changeStepsOne}> Infos générales</Col>
-                </Row>
-                <Row className={steps && steps == 2?"user-rubrique-selected":"user-rubrique" } onClick={changeStepsTwo}>
-                    Domaine
-                </Row>
-                <Row className={steps && steps == 3?"user-rubrique-selected": "user-rubrique"} onClick={changeStepsThree}>
-                    Template
-                </Row>
-                <Row className={steps && steps == 4?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsFour}>Produit</Col>
-                </Row>
-                <Row className={steps && steps == 5?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsFive}>Paiement</Col>
-                </Row>
-                <Row className={steps && steps == 6?"user-rubrique-selected": "user-rubrique"}>
-                   <Col onClick={changeStepsSix}>Livraison</Col>
-                </Row>
-                </div>
-            </div>
-            {steps && steps == 1 ? <InfoGeneral getAllUserInformation={getAllUserInformation} userInformation={infoGen}
+
+               <div>
+                {/* member space section */}
+                <Layout className="member-space">
+           
+                    <Sider width="400px" trigger={null} collapsible collapsed={collapsed} className={dimensions.width> 525?"member-space-sidebar":"member-space-sidebar-mobile"}>
+                    <div className="logo" />                         
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>                                    
+                        <Menu.Item style={{color:"white"}} key="1">
+                        {React.createElement(collapsed ? MenuOutlined : ArrowLeftOutlined, {
+                        className: 'trigger sidebar-icon',
+                        onClick: toggle, 
+                        })}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="2" onClick={changeStepsOne} className={steps && steps == 1?"user-rubrique-selected": "user-rubrique"}> 
+                         {"Infos générale"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="3" onClick={changeStepsTwo} className={steps && steps == 2?"user-rubrique-selected": "user-rubrique"}>
+                        {"Domaine"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="4" onClick={changeStepsThree} className={steps && steps == 3?"user-rubrique-selected": "user-rubrique"}>
+                        {"Template"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="5" onClick={changeStepsFour} className={steps && steps == 4?"user-rubrique-selected": "user-rubrique"}>
+                        {"Produit"}
+                        
+                  
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="6" onClick={changeStepsFive} className={steps && steps == 5?"user-rubrique-selected": "user-rubrique"}>
+                  {"Paiement"}
+                        </Menu.Item>
+                        <Menu.Item style={{color:"white"}} key="7" onClick={changeStepsSix} className={steps && steps == 6?"user-rubrique-selected": "user-rubrique"}>
+                        
+                 {"Livraison"}
+          
+                        </Menu.Item>
+                     
+                    </Menu>
+                    </Sider>
+                     
+                    <Layout className="">
+                    <Content className={collapsed ? 'member-space-content-collapsed' : 'member-space-content'}>
+                        
+                        {steps && steps == 1 ? <InfoGeneral getAllUserInformation={getAllUserInformation} userInformation={infoGen}
             onChangeInfoGeneralUser={onChangeInfoGeneralUser} 
             infoGenError={infoGenError} infoGenErrorMsg={infoGenErrorMsg} 
             defaultFile={defaultFile}
@@ -550,7 +871,8 @@ const BluePage = (props) => {
             {steps && steps == 2 ? <Domaine handleSaveDomaine={handleSaveDomaine} onChangeDomaine={onChangeDomaine} userDomaine={userDomaine}
             userDomaineError={userDomaineError}
             userDomaineErrorMsg={userDomaineErrorMsg}  /> : null}
-            {steps && steps == 3 ? <Template /> : null}
+            {steps && steps == 3 ? <Template onChangeTemplate={onChangeTemplate} handleSaveTemplate={handleSaveTemplate} userTemplate={userTemplate}
+            getTemplateUser={getTemplateUser}   /> : null}
             {steps && steps == 4 ? <Product 
             handleChangeCategorie={handleChangeCategorie}
             addFormFields={addFormFields}
@@ -562,10 +884,21 @@ const BluePage = (props) => {
             handleChangePrix={handleChangePrix}
             handleChangeQuantite={handleChangeQuantite}
             handleSaveForm={handleSaveForm}
-            /> : null}
+         
+            productError={productError}
+            productErrorMsg={productErrorMsg} /> : null}
             {steps && steps == 5 ? <Paiement onChangePaiement={onChangePaiement} handleSavePaiement={handleSavePaiement} userPaiement={userPaiement}
             getPaimentUser={getPaimentUser} /> : null}
-            </Row>
+
+            {steps && steps == 6 ? <Livraison onChangeLivraison={onChangeLivraison} handleSaveLivraison={handleSaveLivraison} userLivraison={userLivraison}
+            getLivraisonUser={getLivraisonUser} /> : null}
+                       
+                    </Content>
+                    </Layout>
+                </Layout>
+            </div>
+
+
         );
        
 

@@ -77,10 +77,10 @@ const UserConfiramtionCode = (props) => {
         return(
             <>
             <Row>
-             <div className="blue-page-shifty">
+             <div className="blue-page-shifty-code">
                      <img className="blue-page-image" src={imageShifty} /> 
              </div>
-             <div className="register-form-content">
+             <div className="code-form-content">
                  <Row className="user-confirmation-code-title" >
                  <Col>
                     Confirmation 

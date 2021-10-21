@@ -41,7 +41,7 @@ class MenuNav extends Component {
                             <Menu.Item onClick={this.goService}>
                                Services
                             </Menu.Item>
-                            <Menu.Item onClick={this.goOffre}>
+                            <Menu.Item >
                                 Offres
                             </Menu.Item>
                         </Menu>

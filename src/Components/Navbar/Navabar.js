@@ -39,7 +39,7 @@ class Navbar extends Component {
       <ul className='btn-user'>
       <li>
               <img className="image-logo-username" src={UserLogo} />
-              <span className="mobileHidden"> {this.props.auth.client.username}</span>
+              <span className=""> {this.props.auth.client.username}</span>
             
             <ul class="dropdown">
                 <li onClick={this.goUser}><a href="#">Profile</a></li>
@@ -98,10 +98,10 @@ class Navbar extends Component {
           <a href="/offre">Offres</a>
         </Menu.Item>
         <Menu.Item>
-          <a href="#">Devenir partenaire</a>
+          <a href="/devenir-partenaire">Devenir partenaire</a>
         </Menu.Item>
         <Menu.Item>
-          <a href="#">Contact</a>
+          <a href="/Contact">Contact</a>
         </Menu.Item>
       </Menu>
       </Drawer>

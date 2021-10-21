@@ -47,6 +47,8 @@ const Footer = (props) => {
     }
 
     const onSubmit =async()=>{
+        setSuccess('')
+        setError('')
         const ERROR = [...step.validation.error]
         const ERROR_MSG=[...step.validation.errorMsg]
         setStepError(ERROR)
@@ -54,7 +56,7 @@ const Footer = (props) => {
         
         if(!step.validation.error.includes(true)){
         let formdata = new FormData()
-        formdata.append('email',step.nomEntreprise)
+        formdata.append('email',step.email)
        
         const requestOptions = {
             method: 'POST',
@@ -64,14 +66,12 @@ const Footer = (props) => {
           console.log("code",data.status)
           if(data.status == 201){
             setSuccess('Le suivi a été enregistré avec succès')
-          
-        
           }
-          if(data.status !== 201){
+          if(data.status == 400){
             setError('email existe déjà')
-            
-            
-           
+          }
+          if(data.status !== 201 && data.status !== 400){
+            setError('error')
           }
 
     }}
@@ -105,7 +105,7 @@ const Footer = (props) => {
                                    
                                    <p className="contact-footer"> Services </p>
                                 </Menu.Item>
-                                <Menu.Item onClick={() => goOffre()}>
+                                <Menu.Item >
                                  
                                  <p className="contact-footer"> Offres </p>
                                </Menu.Item>

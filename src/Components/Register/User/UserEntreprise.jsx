@@ -157,8 +157,12 @@ const UserEntreprise = (props) => {
                 </Form.Item>
                 <Form.Item>
                 <Select defaultValue="Secteur d'activité" className='row-user-information-adresse' onChange={(e)=>onChangeStepOneData(e,'secteurActivite',1)}>
-                    <Option value="Fondateur/ co-Fondateur">{'Fondateur/ co-Fondateur'}</Option>
-                    <Option value="Membre de l'équipe">{"Membre de l'équipe"}</Option>
+                    <Option value="E-commerce">{'E-commerce'}</Option>
+                    <Option value="Technologie">{"Technologie"}</Option>
+                    <Option value="Industrie">{"Industrie"}</Option>
+                    <Option value="Agriculture">{"Agriculture"}</Option>
+                    <Option value="Communication">{"Communication"}</Option>
+                    <Option value="Service">{"Service"}</Option>
                 </Select>
                 {stepError[1]&&<div style={{color:'red'}}>{stepErrorMsg[1]}</div>}
                 </Form.Item>
@@ -168,8 +172,12 @@ const UserEntreprise = (props) => {
                 </Form.Item>
                 <Form.Item>
                 <Select defaultValue="Chiffre d'afaire anuelle" className='row-user-information-adresse' onChange={(e)=>onChangeStepOneData(e,'chiffreAffaire',3)}>
-                    <Option value="Fondateur/ co-Fondateur">{'Fondateur/ co-Fondateur'}</Option>
-                    <Option value="Membre de l'équipe">{"Membre de l'équipe"}</Option>
+                    <Option value="Moins de 5000 DT">{'Moins de 5000 DT'}</Option>
+                    <Option value="À partir de 5000 DT">{"À partir de 5000 DT"}</Option>
+                   
+                    <Option value="Entre 5000 DT et 10000 DT">{"Entre 5000 DT et 10000 DT"}</Option>
+                    <Option value="Plus de 10000 DT">{"Plus de 10000 DT"}</Option>
+                    <Option value="Plus de 20000 DT">{"Plus de 20000 DT"}</Option>
                 </Select>
                 {stepError[3]&&<div style={{color:'red'}}>{stepErrorMsg[3]}</div>}
                 </Form.Item>

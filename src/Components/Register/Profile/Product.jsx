@@ -22,6 +22,23 @@ const Product = (props) => {
     const [prix, setPrix] = useState("")
     const [quantite,setQuantite] = useState("")
     const [photo,setPhoto] = useState("")
+    const [dimensions, setDimensions] = React.useState({ 
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    
+    useEffect(() => {
+     const   handleResize =()=> {
+            setDimensions({
+              height: window.innerHeight,
+              width: window.innerWidth
+            })
+      }
+          window.addEventListener('resize', handleResize)
+    }, []);
+    console.log("dimenssion1",dimensions);
+  
+  
     console.log('props',props);
 
 
@@ -141,6 +158,7 @@ const Product = (props) => {
     //     }
     // }
     // console.log("photo", photo);
+    console.log("error product",props.productErrorMsg);
     
     return(
             <div className="user-information-pages">
@@ -153,19 +171,57 @@ const Product = (props) => {
             
              
             >
+            {dimensions.width > 525 ?<div>
             <div className='user-information-title-product'>Catégorie</div>
             {formValues.map((element, index) => (
-            <Row className='row-user-information-struct-product'>
+            <Row className='row-user-information-struct-product' >
+            <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
+            
+                <Form.Item >
+                    <Select defaultValue="Categorie" onChange={e => props.handleChangeCategorie(index, e)} className='row-user-information-info-generale-input'>
+                            <Option value="Santé et beauté">{'Santé et beauté'}</Option>
+                            <Option value="Produits pour animaux de compagnie">{"Produits pour animaux de compagnie"}</Option>
+                            <Option value="Les articles de sport">{'Les articles de sport'}</Option>
+                            <Option value="Articles pour bébés et enfants">{'Articles pour bébés et enfants'}</Option>
+                            <Option value="Les technologies">{'Les technologies'}</Option>
+                            <Option value="Les produits artisanaux et fabriqués à la main">{'Les produits artisanaux et fabriqués à la main'}</Option>
+                            <Option value="Alimentation et boissons">{'Alimentation et boissons'}</Option>
+                            
+                    </Select>
+                    {props.productError[5]&&<div style={{color:'red'}}>{props.productErrorMsg[5]}</div>}                
+                </Form.Item>
+            </Col>
+            <Col  >
+            {!index?<Form.Item key={index}>
+                <div onClick={() => addFormFields()}className="user-information-categorie-btn-plus"><span>+</span></div>
+            </Form.Item>:<Col>
+            <Form.Item>
+            <div style={{ width:"50px"}} onClick={() => addFormFields()}className="user-information-categorie-btn-plus-none"><span></span></div></Form.Item></Col>}
+            </Col>
+            </Row>
+            ))} 
+                
+            </div>:
+            <div>
+                <div className='user-information-title-product'>Catégorie</div>
+                {formValues.map((element, index) => (
+            <Row className='row-user-information-struct-product-mobile' >
             <Col className="row-user-inforamtion-style-product" >
             
                 <Form.Item >
                     <Select defaultValue="Categorie" onChange={e => props.handleChangeCategorie(index, e)} className='row-user-information-info-generale-input'>
-                            <Option value="Fondateur/ co-Fondateur">{'Fondateur/ co-Fondateur'}</Option>
-                            <Option value="Membre de l'équipe">{"Membre de l'équipe"}</Option>
-                    </Select>               
+                            <Option value="Santé et beauté">{'Santé et beauté'}</Option>
+                            <Option value="Produits pour animaux de compagnie">{"Produits pour animaux de compagnie"}</Option>
+                            <Option value="Les articles de sport">{'Les articles de sport'}</Option>
+                            <Option value="Articles pour bébés et enfants">{'Articles pour bébés et enfants'}</Option>
+                            <Option value="Les technologies">{'Les technologies'}</Option>
+                            <Option value="Les produits artisanaux et fabriqués à la main">{'Les produits artisanaux et fabriqués à la main'}</Option>
+                            <Option value="Alimentation et boissons">{'Alimentation et boissons'}</Option>  
+                    </Select>  
+                    {props.productError[5]&&<div style={{color:'red'}}>{props.productErrorMsg[5]}</div>}             
                 </Form.Item>
             </Col>
-            <Col>
+            <Col  >
             {!index?<Form.Item key={index}>
                 <div onClick={() => addFormFields()}className="user-information-categorie-btn-plus"><span>+</span></div>
             </Form.Item>:<Col>
@@ -174,84 +230,80 @@ const Product = (props) => {
             </Col>
             </Row>
             ))}
+
+            </div>
+            
+              }   
+            
             <div className='user-information-title-product'>Produit</div>
             {produit.map((element, index) => (
             <div>
-            <Row className='row-user-information-struct-product-photo'>
-                <Col className="row-user-inforamtion-style-product">
-                
-                    <Form.Item >
-                        <Select defaultValue="Produit" onChange={(e)=>props.handleChangeProduits(index, e)}  className='row-user-information-info-generale-input'>
-                                <Option value="Fondateur/ co-Fondateur">{'Fondateur/ co-Fondateur'}</Option>
-                                <Option value="Membre de l'équipe">{"Membre de l'équipe"}</Option>
-                        </Select>               
-                    </Form.Item>
+            <Row className='row-user-information-struct-product-photo' >
+                <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 15: 21}>
+                <Form.Item>
+                    <Input placeholder="Produit"  onChange={(e)=>props.handleChangeProduits(index, e.target.value)}  className='row-user-information-info-generale-input' />
+                    {props.productError[0]&&<div style={{color:'red'}}>{props.productErrorMsg[0]}</div>}
+                </Form.Item>
+                 
                 </Col>
-            <Col>
-            {!index?
-            <Form.Item key={index}>
-                <div onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus"><span>+</span></div>
-            </Form.Item>
-            :
-            <Col>
-            <Form.Item>
-            <div style={{ width:"50px"}} onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus-none"><span></span></div>
-            </Form.Item>
-            </Col>}
-            </Col>
-            <Col className={"upload-photo-product"}>
-            <Upload {...image}  onChange={(info)=>props.onUploadPhoto(info.fileList[0].originFileObj, index)}>
+            
+                <Col className={"upload-photo-product"} span={dimensions.width > 525 ? 6: 20} >
+            {/* <Upload {...image}  onChange={(info)=>props.onUploadPhoto(info.fileList[0].originFileObj, index)} > */}
+            <Upload {...image}  onChange={(info)=>props.onUploadPhoto(info.fileList, index)}  >
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                {props.productError[1]&&<div style={{color:'red'}}>{props.productErrorMsg[1]}</div>}
             </Upload>
             </Col>
             </Row>
 
             <Row className='row-user-information-struct-product'>
-                <Col className="row-user-inforamtion-style-product" >
+                <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
                 <Form.Item>
-                <Select defaultValue="Type"  className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangeType(index, e)}>
-                                <Option value="Fondateur/ co-Fondateur">{'Fondateur/ co-Fondateur'}</Option>
-                                <Option value="Membre de l'équipe">{"Membre de l'équipe"}</Option>
-                        </Select>
+                    <Input placeholder="Type"   className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangeType(index,e.target.value)} />
+                   
                 </Form.Item>
+
                 </Col>
-                <Col>
+                <Col className="user-information-categorie-btn-plus-none">
                     <Form.Item>
                     <div style={{ width:"50px"}} onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus-none"><span></span></div>
                     </Form.Item>
                 </Col>
             </Row>
             <Row className='row-user-information-struct-product'>
-                <Col className="row-user-inforamtion-style-product" >
+                <Col className="row-user-inforamtion-style-product"  span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                         <TextArea className='row-user-information-info-generale-input-text-area' rows={4} placeholder='Description' onChange={(e)=>props.handleChangeDescription(index, e.target.value)} />
+                        {props.productError[2]&&<div style={{color:'red'}}>{props.productErrorMsg[2]}</div>}
                     </Form.Item>
                 </Col>
-                <Col>
+                <Col className="user-information-categorie-btn-plus-none">
                     <Form.Item>
                     <div style={{ width:"50px"}} onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus-none"><span></span></div>
                     </Form.Item>
                 </Col>
             </Row>
             <Row className='row-user-information-struct-product'>
-                <Col className="row-user-inforamtion-style-product" >
+                <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                         <Input placeholder="Prix" className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangePrix(index, e.target.value)} />
+                        {props.productError[3]&&<div style={{color:'red'}}>{props.productErrorMsg[3]}</div>}
                     </Form.Item>
                 </Col>
-                <Col>
+                <Col className="user-information-categorie-btn-plus-none">
                     <Form.Item>
                     <div style={{ width:"50px"}} onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus-none"><span></span></div>
                     </Form.Item>
                 </Col>
             </Row>
             <Row className='row-user-information-struct-product'>
-                <Col className="row-user-inforamtion-style-product" >
+                <Col className="row-user-inforamtion-style-product" span={dimensions.width > 525 ? 18: 24}>
                     <Form.Item>
                     <Input placeholder="Quantité" className='row-user-information-info-generale-input' onChange={(e)=>props.handleChangeQuantite(index, e.target.value)} />
+                    {props.productError[4]&&<div style={{color:'red'}}>{props.productErrorMsg[4]}</div>}
                     </Form.Item>
                 </Col>
-                <Col>
+                <Col className="user-information-categorie-btn-plus-none">
                     <Form.Item>
                     <div style={{ width:"50px"}} onClick={() => addFormFieldsProduct()}className="user-information-categorie-btn-plus-none"><span></span></div>
                     </Form.Item>
@@ -262,7 +314,7 @@ const Product = (props) => {
             ))}
             
             </Form>
-            <Row className='button-sauvgarder-user-information'><Button  className='button-sauvgarder-user-information-style' onClick={props.handleSaveForm}>Sauvgarder</Button></Row>
+            <Row className='button-sauvgarder-user-product'><Button  className='button-sauvgarder-user-information-style' onClick={props.handleSaveForm}>Sauvgarder</Button></Row>
             </div>
             
        

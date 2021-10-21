@@ -33,7 +33,7 @@ const Domaine = (props) => {
                         </Form.Item>
                     </div>  
                 </Form>
-                <Row className='button-sauvgarder-user-information'><Button  disabled={modification} onClick={props.handleSaveDomaine} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-domaine'><Button  disabled={modification} onClick={props.handleSaveDomaine} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
             </div> 
         </div>
     )
