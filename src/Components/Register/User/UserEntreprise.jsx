@@ -136,7 +136,7 @@ const UserEntreprise = (props) => {
         return(
        
             <Row>
-            <div className="blue-page-shifty">
+            <div className="blue-page-shiftyy">
                 <img className="blue-page-image" src={interface2} />
             </div>
             <div className="register-form-content-steps-1">
@@ -150,7 +150,7 @@ const UserEntreprise = (props) => {
               className='form-user-information'
              
             >
-                <div className='user-information-title'>Parlez-nous de votre entreprise</div>
+                <div className='user-information-title-entreprise'>Parlez-nous de votre entreprise</div>
                 <Form.Item>
                     <Input placeholder="Nom de l'entreprise" className='row-user-information-adresse' onChange={(e)=>onChangeStepOneData(e.target.value,'nomEntreprise',0)} />
                     {stepError[0]&&<div style={{color:'red'}}>{stepErrorMsg[0]}</div>}
@@ -193,7 +193,7 @@ const UserEntreprise = (props) => {
                 </Form.Item>
              
             </Form>
-                <Row className='button-sauvgarder-user-information'><Button  className='button-sauvgarder-user-information-style' onClick={submitForm}>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-information-entreprise'><Button  className='button-sauvgarder-user-information-style' onClick={submitForm}>Sauvgarder</Button></Row>
             </div>
             </Row>
         )

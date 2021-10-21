@@ -123,7 +123,7 @@ const UserInformation = (props) => {
         return(
        
             <Row>
-            <div className="blue-page-shifty">
+            <div className="blue-page-shiftyy">
                 <img className="blue-page-image" src={interface2} />
             </div>
             <div className="register-form-content-steps-1">
@@ -138,7 +138,7 @@ const UserInformation = (props) => {
               className='form-user-information'
              
             >
-                <div className='user-information-title'>Plus que quelques infos de contact</div>
+                <div className='user-information-title-mobile'>Plus que quelques infos de contact</div>
                 <Form.Item>
                     <PhoneInput country={"tn"} placeholder={'+216 99 88 77 66'} value={step.phone} onChange={(e)=>onChangeStepOneData(e,'phone',0)}  />
                     {stepError[0]&&<div style={{color:'red'}}>{stepErrorMsg[0]}</div>}
@@ -178,7 +178,7 @@ const UserInformation = (props) => {
                        </div>
                 </div>
             </Form>
-                <Row className='button-sauvgarder-user-information'><Button  className='button-sauvgarder-user-information-style' onClick={submitForm}>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-informationn'><Button  className='button-sauvgarder-user-information-style' onClick={submitForm}>Sauvgarder</Button></Row>
             </div>
             </Row>
         )
