@@ -3,6 +3,18 @@
     width: 29%;
     height: 130vh;
   }
+  .fixed-oriented-text {
+    font-family: 'PoppinsBold';
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 2.4px;
+    position: fixed;
+    left: 1%;
+    bottom: 3%;
+    color: white;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
   .blue-page-shiftyy {
     background-color: #181144;
     width: 29%;

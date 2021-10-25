@@ -17,6 +17,7 @@ import UserEntreprise from "../Components/Register/User/UserEntreprise";
 import BluePage from "../Components/Register/BluePage";
 import DevenirPartenaire from "../Components/devenir partenaire/DevenirPartenaire";
 import Contact from "../Pages/Contact";
+import Choixtemplate from "../Components/Register/Profile/Choixtemplate";
 
 
 const MainRoute = (props) => {
@@ -31,7 +32,7 @@ const MainRoute = (props) => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/Contact" component={Contact} />
         <Route exact path="/espace-client" component={EspaceClient} />
-        <Route exact path="/template" component={Template} />
+        <Route exact path="/template" component={Choixtemplate} />
         <Route exact path="/offre" component={Offre} />
         <Route exact path="/devenir-partenaire" component={DevenirPartenaire} />
         <PrivateRoute exact path="/user" isAuthenticated={props.auth.isLogIn} component={UserInforamtion} />

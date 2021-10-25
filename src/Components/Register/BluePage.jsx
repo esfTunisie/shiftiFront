@@ -13,6 +13,7 @@ import Template from "./Profile/Template";
 import { apiURL } from "../../Config/config";
 import Livraison from "./Profile/Livraison";
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Link, withRouter } from 'react-router-dom'
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -25,6 +26,7 @@ import {
     MenuOutlined,
     ArrowLeftOutlined,
   } from '@ant-design/icons';
+import Choixtemplate from "./Profile/Choixtemplate";
 
 const { TextArea } = Input;
 const { Header, Content, Footer, Sider } = Layout;
@@ -853,7 +855,9 @@ const BluePage = (props) => {
                  {"Livraison"}
           
                         </Menu.Item>
-                     
+                        <Link to="/">
+                          <h3 className="fixed-oriented-text">Retour</h3>
+                        </Link>
                     </Menu>
                     </Sider>
                      
@@ -871,7 +875,7 @@ const BluePage = (props) => {
             {steps && steps == 2 ? <Domaine handleSaveDomaine={handleSaveDomaine} onChangeDomaine={onChangeDomaine} userDomaine={userDomaine}
             userDomaineError={userDomaineError}
             userDomaineErrorMsg={userDomaineErrorMsg}  /> : null}
-            {steps && steps == 3 ? <Template onChangeTemplate={onChangeTemplate} handleSaveTemplate={handleSaveTemplate} userTemplate={userTemplate}
+            {steps && steps == 3 ? <Choixtemplate onChangeTemplate={onChangeTemplate} handleSaveTemplate={handleSaveTemplate} userTemplate={userTemplate}
             getTemplateUser={getTemplateUser}   /> : null}
             {steps && steps == 4 ? <Product 
             handleChangeCategorie={handleChangeCategorie}
