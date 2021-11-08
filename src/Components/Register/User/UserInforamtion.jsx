@@ -2,8 +2,8 @@ import React, { useState, useEffect  } from "react";
 import { connect } from "react-redux"
 import { Input, Row, Col, notification, Button, Alert, Form } from 'antd';
 import interface2 from "../../../assets/img/interface.png"
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 import { apiURL } from "../../../Config/config";
 
 
@@ -28,7 +28,7 @@ const UserInformation = (props) => {
         let aux ={...step}
             aux[key]=value
             if(key=="phone"){
-              if(value.trim()===''){
+              if(value ==''){
                 aux.validation.error[index]=true
                 aux.validation.errorMsg[index]='required'
               }else{
@@ -140,8 +140,9 @@ const UserInformation = (props) => {
             >
                 <div className='user-information-title-mobile'>Plus que quelques infos de contact</div>
                 <Form.Item>
-                    <PhoneInput country={"tn"} placeholder={'+216 99 88 77 66'} value={step.phone} onChange={(e)=>onChangeStepOneData(e,'phone',0)}  />
-                    {stepError[0]&&<div style={{color:'red'}}>{stepErrorMsg[0]}</div>}
+                <PhoneInput defaultCountry={"TN"} placeholder="Téléphone" value={step.phone} onChange={(e)=>onChangeStepOneData(e,'phone',0)} />
+                {stepError[0]&&<div style={{color:'red'}}>{stepErrorMsg[0]}</div>}
+                  
                 </Form.Item>
                 <Form.Item>
                     <Input placeholder='Adresse' className='row-user-information-adresse' onChange={(e)=>onChangeStepOneData(e.target.value,'adresse',1)} />
