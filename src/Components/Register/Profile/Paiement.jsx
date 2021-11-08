@@ -9,25 +9,22 @@ import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 
 const Paiement = (props) => {
     const [value, setValue] = React.useState(1);
-    const [modification, setmodification] = useState(true)
+   
 
 
-    const  modificate = () => {
-        setmodification(!modification)
-       
-  }; 
+
     // const onChangePaiement = e => {
     //     console.log('radio checked', e.target.value);
     //     setValue(e.target.value);
     //   };
-
+    console.log("props mod", props.modification);
     return(
         <div className="user-information-pages">
             <div className='user-information-domaine'>
-            <Row><span className="member-space-update-text" style={{paddingBottom:"20px"}} onClick={modificate}>{modification ? 'modifiez le paiement' : 'Activer les modifications'} </span></Row>
+            <Row><span className="member-space-update-text" style={{paddingBottom:"20px"}} onClick={props.modificate}>{props.modification ? 'modifiez le paiement' : 'Activer les modifications'} </span></Row>
 
                     <div className="row-user-information-paiement">
-                    <Radio.Group disabled={modification} onChange={props.onChangePaiement} defaultValue={props.userPaiement && props.userPaiement.type}>
+                    <Radio.Group disabled={props.modification} onChange={props.onChangePaiement} defaultValue={props.userPaiement && props.userPaiement.type}>
                         <Row className='row-user-infomation-paiement-style'>
                             <Col span={12}>
                             <Radio value={"e-dinars jeune"}><img src={eDinarsJeune} width='50%' /></Radio>
@@ -47,7 +44,7 @@ const Paiement = (props) => {
                     </Radio.Group>
                     </div>  
               
-                <Row className='button-sauvgarder-user-paiement'><Button  disabled={modification} onClick={props.handleSavePaiement} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                <Row className='button-sauvgarder-user-paiement'><Button  disabled={props.modification} onClick={props.handleSavePaiement} className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
             </div> 
         </div>
     )

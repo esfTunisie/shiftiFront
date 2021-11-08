@@ -610,7 +610,7 @@
   }
 
   .slide img {
-    max-width: 100%;
+    max-width: 130%;
   }
 
   .slide {
@@ -620,6 +620,7 @@
   }
 
   .activeSlide {
+    width: 100%; 
     transform: scale(1);
     opacity: 1;
     box-shadow: 10px 5px 5px rgb(58, 57, 57);
@@ -1016,7 +1017,7 @@
       padding: 50px 20px;
     }
     .slide img {
-      max-width: 100%;
+      max-width: 200%;
     }
     .btn-slider {
       font-size: 14px;
@@ -1030,7 +1031,7 @@
       z-index: 10;
     }
     .arrow-size {
-      max-width: 70%;
+      max-width: 30%;
     }
     .arrow svg {
       transition: color 300ms;
@@ -2042,7 +2043,26 @@ font-size: 25px;
   overflow-x: hidden;
   overflow-y: hidden;
 }
+.PhoneInputInput{
+  height: 55px;
+  border-radius: 55px;
+  margin-bottom: 1%;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+}
 
+.PhoneInputInput:focus{
+  border-color: #40a9ff;
+    border-right-width: 1px!important;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+}
+.PhoneInput{
+ 
+  width: 100%;
+
+  
+}
 .row-user-information-info-generale-input{
   height: 55px;
   border-radius: 55px;
@@ -2069,6 +2089,16 @@ font-size: 25px;
   overflow-y: hidden;
   padding-left: 5%;
   margin-top: 5%; 
+  min-height: 100vh;
+}
+.user-template-pages{
+  width: 92%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+ 
+  margin-top: 2%; 
   min-height: 100vh;
 }
 .row-user-inforamtion-style{
@@ -2378,6 +2408,9 @@ margin-right: 5%;
     font-size: 13px;
   }
   .user-information-pages{
+    width: 90%;
+  }
+  .user-template-pages{
     width: 90%;
   }
   .user-information-categorie-btn-plus-none{

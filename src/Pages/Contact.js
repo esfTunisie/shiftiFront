@@ -10,7 +10,7 @@ import imageShifty from "../assets/img/Ellipse 1.png"
 import map from "../assets/img/maps.PNG"
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
+import { Link, withRouter } from 'react-router-dom'
 import { RightOutlined, EnvironmentFilled, MailFilled, PhoneFilled } from '@ant-design/icons';
 import { apiURL } from "../Config/config";
 const { TextArea } = Input;
@@ -140,6 +140,9 @@ const Contact = (props) => {
                 <div className="devenir-partenaire">
                         <div className="img-devenir-partenaire-page-bleu">
                             <img className="devenir-partenaire-img" src={imageShifty} />
+                            <Link to="/">
+                          <h3 className="fixed-oriented-text">Retour</h3>
+                        </Link>
                         </div>
                 </div>
               <div className="contact-right-content">

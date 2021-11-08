@@ -12,7 +12,7 @@ const InfoGeneral = (props) => {
     const [fileList, setFileList] = useState()
     const [userInformation, setuserInformation] = useState()
     const [loading, setloading] = useState(false)
-    const [modification, setmodification] = useState(true)
+   
     const [dimensions, setDimensions] = React.useState({ 
         height: window.innerHeight,
         width: window.innerWidth
@@ -51,10 +51,6 @@ const InfoGeneral = (props) => {
           thumbUrl: props.userInformation && props.userInformation.rne.length>0? apiURL+props.userInformation.rne.replace('/public/', ''): '',
         },
       ];  
-    const  modificate = () => {
-        setmodification(!modification)
-       
-  }; 
   
       console.log('userInformation',props.fileRne);
     return(
@@ -68,18 +64,18 @@ const InfoGeneral = (props) => {
             
              
             >
-            <span className="member-space-update-text" onClick={modificate}>{modification ? 'modifiez le profile' : 'Activer les modifications'} </span>
+            <span className="member-space-update-text" onClick={props.modificate}>{props.modification ? 'modifiez le profile' : 'Activer les modifications'} </span>
 
             <Row>
             <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder="username" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'username',0)} value={props.userInformation && props.userInformation.username}  />
+                        <Input disabled={props.modification} placeholder="username" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'username',0)} value={props.userInformation && props.userInformation.username}  />
                         {props.infoGenError[0]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[0]}</div>}
                 </Form.Item>
             </Col>
             <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder="Nom de l'entreprise" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'nomEntreprise',1)} value={props.userInformation &&props.userInformation.nomEntreprise}  />
+                        <Input disabled={props.modification} placeholder="Nom de l'entreprise" className='row-user-information-info-generale-input' onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'nomEntreprise',1)} value={props.userInformation &&props.userInformation.nomEntreprise}  />
                         {props.infoGenError[1]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[1]}</div>}
                 </Form.Item>
             </Col>
@@ -87,12 +83,12 @@ const InfoGeneral = (props) => {
             <Row>
             <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder="Email"  className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.email} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'email',2)} />
+                        <Input disabled={props.modification} placeholder="Email"  className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.email} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'email',2)} />
                         {props.infoGenError[2]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[2]}</div>}
                 </Form.Item>
             </Col>
             <Col span={dimensions.width > 525 ? 10: 24}>
-                <Select disabled={modification} defaultValue="Secteur d'activité" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.secteurActivite} onChange={(e)=>props.onChangeInfoGeneralUser(e,'secteurActivite',3)}>
+                <Select disabled={props.modification} defaultValue="Secteur d'activité" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.secteurActivite} onChange={(e)=>props.onChangeInfoGeneralUser(e,'secteurActivite',3)}>
                     <Option value="E-commerce">{'E-commerce'}</Option>
                     <Option value="Technologie">{"Technologie"}</Option>
                     <Option value="Industrie">{"Industrie"}</Option>
@@ -106,13 +102,13 @@ const InfoGeneral = (props) => {
             <Row>
             <Col className="row-user-inforamtion-style" span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder="Phone" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.phone} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'phone',4)} />
+                        <Input disabled={props.modification} placeholder="Phone" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.phone} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'phone',4)} />
                         {props.infoGenError[4]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[4]}</div>}
                 </Form.Item>
             </Col>
             <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder="Produit" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.produit} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'produit',5)} />
+                        <Input disabled={props.modification} placeholder="Produit" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.produit} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'produit',5)} />
                         {props.infoGenError[5]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[5]}</div>}
                 </Form.Item>
             </Col>
@@ -124,7 +120,7 @@ const InfoGeneral = (props) => {
                 </Form.Item>
             </Col> */}
             <Col span={dimensions.width > 525 ? 10: 24}className="row-user-inforamtion-style">
-                <Select disabled={modification} defaultValue="Chiffre d'affaire annuel" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.chiffreAffaire} onChange={(e)=>props.onChangeInfoGeneralUser(e,'chiffreAffaire',6)}>
+                <Select disabled={props.modification} defaultValue="Chiffre d'affaire annuel" className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.chiffreAffaire} onChange={(e)=>props.onChangeInfoGeneralUser(e,'chiffreAffaire',6)}>
                     <Option value="Moins de 5000 DT">{'Moins de 5000 DT'}</Option>
                     <Option value="À partir de 5000 DT">{"À partir de 5000 DT"}</Option>
                    
@@ -137,7 +133,7 @@ const InfoGeneral = (props) => {
             <Col span={dimensions.width > 525 ? 10: 24}>
             <Form.Item>
                 <Upload  placeholder={'RNE'} maxCount={1} accept=".doc,.docx,application/msword"  onChange={(info)=>props.onChangeInfoGeneralUser(info.fileList[0].originFileObj,'rne',7)} fileList={[...defaultFile]} >
-                    <Button disabled={modification} className='row-user-information-adresse' icon={<UploadOutlined />}><img width={'5%'} style={{float:"right"}} src={piceJoint} /></Button>    
+                    <Button disabled={props.modification} className='row-user-information-adresse' icon={<UploadOutlined />}><img width={'5%'} style={{float:"right"}} src={piceJoint} /></Button>    
                 </Upload>
                 {props.infoGenError[7]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[7]}</div>}
             </Form.Item>
@@ -156,31 +152,31 @@ const InfoGeneral = (props) => {
                 <div className='row-user-information'>
                         <div>
                         <Form.Item>
-                            <Input disabled={modification} placeholder={'N'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.numberRue} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'numberRue',8)} />
+                            <Input disabled={props.modification} placeholder={'N'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.numberRue} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'numberRue',8)} />
                             {props.infoGenError[8]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[8]}</div>}
                         </Form.Item>
                         </div>
                         <div>
                         <Form.Item>
-                            <Input disabled={modification} placeholder={'Rue'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.rue} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'rue',9)} />
+                            <Input disabled={props.modification} placeholder={'Rue'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.rue} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'rue',9)} />
                             {props.infoGenError[9]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[9]}</div>}
                         </Form.Item>
                         </div>
                 </div>
                 <Form.Item>
-                        <Input disabled={modification} placeholder={'adresse'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.adresse} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'adresse',10)} />
+                        <Input disabled={props.modification} placeholder={'adresse'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.adresse} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'adresse',10)} />
                         {props.infoGenError[10]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[10]}</div>}
                 </Form.Item>
                 <div className='row-user-information'>
                         <div>
                         <Form.Item>
-                            <Input disabled={modification} placeholder={'Ville'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.ville} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'ville',11)} />
+                            <Input disabled={props.modification} placeholder={'Ville'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.ville} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'ville',11)} />
                             {props.infoGenError[11]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[11]}</div>}
                         </Form.Item>
                         </div>
                        <div>
                         <Form.Item>
-                                <Input disabled={modification} placeholder={'Code postal'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.codePostal} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'codePostal',12)} />
+                                <Input disabled={props.modification} placeholder={'Code postal'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.codePostal} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'codePostal',12)} />
                                 {props.infoGenError[12]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[12]}</div>}
                         </Form.Item>
                        </div>
@@ -188,13 +184,13 @@ const InfoGeneral = (props) => {
                 </Col>
                 <Col span={dimensions.width > 525 ? 10: 24}>
                 <Form.Item>
-                        <Input disabled={modification} placeholder={'site web'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.webSite} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'webSite',13)} />
+                        <Input disabled={props.modification} placeholder={'site web'} className='row-user-information-info-generale-input' value={props.userInformation &&props.userInformation.webSite} onChange={(e)=>props.onChangeInfoGeneralUser(e.target.value,'webSite',13)} />
                         {props.infoGenError[13]&&<div style={{color:'red'}}>{props.infoGenErrorMsg[13]}</div>}
                 </Form.Item>
                 </Col>
             </Row>
             </Form>
-            <Row className='button-sauvgarder-user-information'><Button disabled={modification} className='button-sauvgarder-user-information-style' onClick={props.saveModificationInfoGen}>Sauvgarder</Button></Row>
+            <Row className='button-sauvgarder-user-information'><Button disabled={props.modification} className='button-sauvgarder-user-information-style' onClick={props.saveModificationInfoGen}>Sauvgarder</Button></Row>
             </div>
             
        

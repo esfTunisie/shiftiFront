@@ -17,18 +17,12 @@ import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 const Choixtemplate  = (props) => {
 
     const [value, setValue] = React.useState(1);
-    const [modification, setmodification] = useState(true)
+ 
     const [dimensions, setDimensions] = React.useState({ 
         height: window.innerHeight,
         width: window.innerWidth
       })
 
-
-    const  modificate = () => {
-        setmodification(!modification)
-  
-       
-  };
 
 
     const [updateCount, setupdateCount] = useState(0)
@@ -92,25 +86,32 @@ const Choixtemplate  = (props) => {
     const template = (idx) => {
              switch(idx) {
              case 0:
-                 rednderView();
+                window.open('http://demo.posthemes.com/pos_ecolife_book/book3/en/', '_blank');
+                
                  break;
              case 1:
-                 rednderView();
+                window.open('http://demo.posthemes.com/pos_ecolife_digital/digital2/en/', '_blank');
+                
                  break;
              case 2:
-                 rednderView();
+                window.open('http://demo.posthemes.com/pos_ecolife_fashion/fashion2/en/', '_blank');
+               
                  break;
              case 3:
-                 rednderView();
+                window.open('http://demo.posthemes.com/pos_ecolife_marketplace/marketplace4/en/', '_blank');
+                
                  break;
             case 4:
-                rednderView()
+                window.open('http://demo.posthemes.com/pos_ecolife_marketplace/marketplace3/en/', '_blank');
+                
                 break;
             case 5:
-                rednderView();
+                window.open ('http://demo.posthemes.com/pos_ecolife_furniture/furniture4/en/', '_blank');
+               
                 break;   
             case 6:
-                rednderView();
+                window.open('http://demo.posthemes.com/pos_ecolife_fastfood/en/', '_blank');
+                
                 break;         
              }
                  
@@ -124,10 +125,12 @@ const Choixtemplate  = (props) => {
 
 
     return(
-       
-        <div className="temp-shop-section-template">
-              <Row className="template-section-modif"><span className="member-space-update-text-template" style={{paddingBottom:"20px"}} onClick={modificate}>{modification ? 'modifier le choix du template' : 'Activer les modifications'} </span></Row>
-                        <h2 className="template-section-title">
+
+        <div className="user-template-pages">
+        <div className='user-information-domaine'>
+        <Row><span className="member-space-update-text" style={{paddingBottom:"20px"}} onClick={props.modificate}>{props.modification ? 'modifier le choix du template' : 'Activer les modifications'}</span></Row>
+
+        <h2 className="template-section-title">
                             Selectionner une template 
                         </h2>  
                         {dimensions.width > 525 ? <center>                     
@@ -135,7 +138,7 @@ const Choixtemplate  = (props) => {
                             <Slider ref={slider => (slider = slider)} {...settings}>
                                 {images.map((img, idx) => (
                                     
-                                <Radio.Group  disabled={modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
+                                <Radio.Group  disabled={props.modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
                                   <Radio value={idx}>  <img src={img} alt={img}  /> 
                                         <Button className="btn-slider" onClick={() =>template(idx)}>
                                             Voir
@@ -152,7 +155,7 @@ const Choixtemplate  = (props) => {
                             <Slider ref={slider => (slider = slider)} {...settings}>
                                 {images.map((img, idx) => (
                                     
-                                <Radio.Group  disabled={modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
+                                <Radio.Group  disabled={props.modification} onChange={props.onChangeTemplate}  defaultValue={props.userTemplate && props.userTemplate.indextemplate}   className={idx === slideIndex ? "slide activeSlide" : "slide"} >
                                   <Radio value={idx}>  <img src={img} alt={img}  /> 
                                         <Button className="btn-slider" onClick={() =>template(idx)}>
                                             Voir
@@ -165,9 +168,15 @@ const Choixtemplate  = (props) => {
                         <a href="#" className="temp-shop-show-all">Voir tout <RightOutlined className="temp-shop-show-all-icon"/> </a>
                         </div> 
                         }
-                        <Row className='button-sauvgarder-user-template'><Button disabled={modification} onClick={props.handleSaveTemplate}  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
+                        <Row className='button-sauvgarder-user-template'><Button disabled={props.modification} onClick={props.handleSaveTemplate}  className='button-sauvgarder-user-information-style'>Sauvgarder</Button></Row>
 
-        </div>
+        </div> 
+    </div>
+
+
+
+
+       
     )
 }
 

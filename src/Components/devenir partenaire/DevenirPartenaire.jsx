@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { connect } from 'react-redux'
 import { Input, Row, Col, notification, Button, Alert, Form, Select } from 'antd';
 import imageShifty from "../../assets/img/Ellipse 1.png"
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+
+
 import { apiURL } from "../../Config/config";
-
-
-
+import { Link, withRouter } from 'react-router-dom'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const DevenirPartenaire = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -61,7 +61,7 @@ const DevenirPartenaire = (props) => {
                 }
               }
               if(key=="tel"){
-                if(value.trim()===''){
+                if(value ==''){
                   aux.validation.error[index]=true
                   aux.validation.errorMsg[index]='required'
                 }else{
@@ -124,10 +124,8 @@ const DevenirPartenaire = (props) => {
                                 setSuccess('votre compte a été enregistré avec succès')
                                 window.location.reload(false);
                               }
-                              if(data.status == 400){
-                                setError('email existe déjà')
-                              }
-                              if(data.status !== 201 && data.status !== 400){
+                             
+                              if(data.status !== 201 ){
                                 setError('error')
                               }
             }
@@ -143,6 +141,9 @@ const DevenirPartenaire = (props) => {
                 <div className="devenir-partenaire">
                     <div className="img-devenir-partenaire-page-bleu">
                         <img className="devenir-partenaire-img" src={imageShifty} />
+                        <Link to="/">
+                          <h3 className="fixed-oriented-text">Retour</h3>
+                        </Link>
                     </div>
                 </div>
                 <div className="devenir-partenaire-right-content">
@@ -171,7 +172,8 @@ const DevenirPartenaire = (props) => {
                             {stepError[2]&&<div style={{color:'red'}}>{stepErrorMsg[2]}</div>}
                         </Row>
                         <Row className="row-devenir-partenaire">
-                        <PhoneInput country={"tn"} placeholder={'+216 99 88 77 66'} onChange={(e)=>onChangeStepOneData(e,'tel',3)} />
+                   
+                        <PhoneInput defaultCountry={"TN"} placeholder="Téléphone"  onChange={(e)=>onChangeStepOneData(e,'tel',3)}/>
                         {stepError[3]&&<div style={{color:'red'}}>{stepErrorMsg[3]}</div>}
                         </Row>
                         <Row className="row-devenir-partenaire">
@@ -179,7 +181,7 @@ const DevenirPartenaire = (props) => {
                             {stepError[4]&&<div style={{color:'red'}}>{stepErrorMsg[4]}</div>}
                         </Row>
                         <Row className="row-devenir-partenaire">
-                            <TextArea className='row-user-information-info-generale-input-text-area' rows={4} onChange={(e)=>onChangeStepOneData(e.target.value,'message',5)}/>
+                            <TextArea className='row-user-information-info-generale-input-text-area' rows={4} placeholder='message' onChange={(e)=>onChangeStepOneData(e.target.value,'message',5)}/>
                             {stepError[5]&&<div style={{color:'red'}}>{stepErrorMsg[5]}</div>}
                         </Row>
                     </div>

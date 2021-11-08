@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
 import imageShifty from "../../assets/img/Ellipse1.svg"
 import imageShiftyPoint from "../../assets/img/1.svg"
-import { Input, Row, Col, Button, Empty } from 'antd';
+import { Input, notification, Row, Col, Button, Empty } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
 import imageShiftyLogin from "../../assets/img/imageLogin.png"
 import InfoGeneral from "./Profile/InfoGeneral";
 import Domaine from "./Profile/Domaine";
@@ -35,7 +36,7 @@ const { SubMenu } = Menu;
 const BluePage = (props) => {
     const [collapsed, setCollapsed] = useState(false)
     const [current, setCurrent] = useState(0)
-   
+    const [modification, setmodification] = useState(true)
     const [steps, setSteps] = useState(4)
     const [fileList, setFileList] = useState()
     const [formValues, setFormValues] = useState([{ categorie: "",}])
@@ -138,7 +139,45 @@ const BluePage = (props) => {
           console.log("info",info);
         },
       };
+      const  modificate = () => {
+        setmodification(!modification)
+       
+  }; 
+      const close = () => {
+        console.log(
+          'Notification was closed. Either the close button was clicked or duration time elapsed.',
+        );
+      };
+    
+      const openNotification = () => {
+        const key = `open${Date.now()}`;
      
+        notification.open({
+          message: 'Success',
+          description:
+            'votre modification est enregistrée avec succès',
+          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        
+          key,
+          onClose: close,
+        });
+      };
+      const openNotif = () => {
+        const key = `open${Date.now()}`;
+     
+        notification.open({
+          message: 'Success',
+          description:
+            'votre produit est ajouté avec succès',
+          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        
+          key,
+          onClose: close,
+        });
+      };
+
+
+
 
       
       const addFormFields = () => {
@@ -332,6 +371,7 @@ const BluePage = (props) => {
                         const dataJsonCategorie = await dataCategorie.json();
                         
                         if(dataCategorie.status == 201){ 
+                            openNotif()
                             console.log("sucesss");
                             setCategorie([{ categorie: "",}])
                             setQuantite("")
@@ -340,6 +380,7 @@ const BluePage = (props) => {
                             setDescription()
                             setType("")
                             setSteps(4)
+                            
                             window.location.reload()  
                         }             
       }
@@ -488,8 +529,9 @@ const BluePage = (props) => {
         const dataJson = await data.json();
         console.log("dataaaa",dataJson);
         if(data.status == 201){ 
+            openNotification()
             getPaimentUser()
-            setSteps(6)
+            setmodification(true)
         }
     }
 
@@ -506,8 +548,9 @@ const BluePage = (props) => {
         const dataJson = await data.json();
         console.log("datalivraison",dataJson);
         if(data.status == 201){ 
+            openNotification()
             getLivraisonUser()
-            setSteps(1)
+            setmodification(true)
         }
     }
     const handleSaveTemplate =async()=>{
@@ -522,8 +565,9 @@ const BluePage = (props) => {
         const dataJson = await data.json();
         console.log("datatemplate",dataJson);
         if(data.status == 201){
+            openNotification()
             getTemplateUser() 
-            setSteps(4)
+            setmodification(true)
         }
     }
     
@@ -569,7 +613,8 @@ const BluePage = (props) => {
             const dataJson = await data.json();
             console.log("dataaaa",dataJson);
             if(data.status == 201){ 
-                setSteps(3)
+                openNotification()
+                setmodification(true)
             }
         }
     }
@@ -795,8 +840,9 @@ const BluePage = (props) => {
               const data =  await fetch(apiURL+'/updateUserInformation/'+props.auth.username,requestOptions);
               const dataJson = await data.json();
               if(data.status == 200){ 
+                  openNotification()
                   console.log("yeeeeeeeeeeeeees");
-                  setSteps(2)
+                  setmodification(true)
               }
         }
     }
@@ -870,9 +916,9 @@ const BluePage = (props) => {
             defaultFile={defaultFile}
             fileRne={fileRne}
             propsRne={propsRne}
-            saveModificationInfoGen={saveModificationInfoGen}
+            saveModificationInfoGen={saveModificationInfoGen} modificate={modificate} modification={modification}
             />: null}
-            {steps && steps == 2 ? <Domaine handleSaveDomaine={handleSaveDomaine} onChangeDomaine={onChangeDomaine} userDomaine={userDomaine}
+            {steps && steps == 2 ? <Domaine handleSaveDomaine={handleSaveDomaine} onChangeDomaine={onChangeDomaine} userDomaine={userDomaine} modificate={modificate} modification={modification}
             userDomaineError={userDomaineError}
             userDomaineErrorMsg={userDomaineErrorMsg}  /> : null}
             {steps && steps == 3 ? <Choixtemplate onChangeTemplate={onChangeTemplate} handleSaveTemplate={handleSaveTemplate} userTemplate={userTemplate}
@@ -887,14 +933,14 @@ const BluePage = (props) => {
             handleChangeDescription={handleChangeDescription}
             handleChangePrix={handleChangePrix}
             handleChangeQuantite={handleChangeQuantite}
-            handleSaveForm={handleSaveForm}
+            handleSaveForm={handleSaveForm} 
          
             productError={productError}
             productErrorMsg={productErrorMsg} /> : null}
-            {steps && steps == 5 ? <Paiement onChangePaiement={onChangePaiement} handleSavePaiement={handleSavePaiement} userPaiement={userPaiement}
+            {steps && steps == 5 ? <Paiement onChangePaiement={onChangePaiement} handleSavePaiement={handleSavePaiement} userPaiement={userPaiement} modificate={modificate} modification={modification}
             getPaimentUser={getPaimentUser} /> : null}
 
-            {steps && steps == 6 ? <Livraison onChangeLivraison={onChangeLivraison} handleSaveLivraison={handleSaveLivraison} userLivraison={userLivraison}
+            {steps && steps == 6 ? <Livraison onChangeLivraison={onChangeLivraison} handleSaveLivraison={handleSaveLivraison} userLivraison={userLivraison} modificate={modificate} modification={modification}
             getLivraisonUser={getLivraisonUser} /> : null}
                        
                     </Content>

@@ -8,7 +8,7 @@ import { apiURL } from "../../Config/config";
 import isEmail from "validator/lib/isEmail";
 import { SmileOutlined } from '@ant-design/icons';
 import imageShifty from "../../assets/img/Ellipse1.svg"
-
+import { Link, withRouter } from 'react-router-dom'
 
 const Registration =(props)=>{
     
@@ -168,9 +168,12 @@ const verifEmail =async(value)=>{
   }
      
         return (
-          <Row>
+          <Row >
             <div  className="blue-page-shifty">
-                    <img className="blue-page-image" src={imageShifty} />
+                    <img className="blue-page-image" src={imageShifty} /> 
+                    <Link to="/">
+                          <h3 className="fixed-oriented-text">Retour</h3>
+                        </Link>
             </div>
             <div className="register-form-content">
           <div className="register-form-title">

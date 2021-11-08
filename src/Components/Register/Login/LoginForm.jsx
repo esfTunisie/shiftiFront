@@ -6,7 +6,7 @@ import { apiURL } from "../../../Config/config";
 import { Input, Row, Col, notification, Button, Alert, Form } from 'antd';
 import imageShifty from "../../../assets/img/Ellipse1.svg"
 import isEmail from "validator/lib/isEmail";
-
+import { Link, withRouter } from 'react-router-dom'
 
 
 
@@ -147,9 +147,12 @@ console.log("dimenssionlogin",dimensions);
 
      
         return (
-            <Row>
+            <Row >
                 <div  className="blue-page-shifty">
                     <img className="blue-page-image" src={imageShifty} />
+                    <Link to="/">
+                          <h3 className="fixed-oriented-text">Retour</h3>
+                        </Link>
                 </div>
                 <div className="register-form-content">
                 <div className="login-form-title">
