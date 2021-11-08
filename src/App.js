@@ -5,7 +5,7 @@ import "./assets/css/style.css";
 import ReactGA from 'react-ga';
 import RouteChangeTracker from './RouteChangeTracker';
 
-const TRACKING_ID = "G-LLCB7Y2YTH"; // YOUR_OWN_TRACKING_ID
+const TRACKING_ID = "UA-212127962-1"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
